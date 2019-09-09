@@ -12,11 +12,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Hello World]]></title>
-    <url>%2F2019%2F09%2F09%2Fhello-world%2F</url>
-    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
-  </entry>
-  <entry>
     <title><![CDATA[CSRF漏洞]]></title>
     <url>%2F2019%2F09%2F08%2FCSRF%E6%BC%8F%E6%B4%9E%2F</url>
     <content type="text"><![CDATA[CSRF漏洞的概述 CSRF(Cross-Site Request Forgery,跨站请求伪造) 是一种挟制用户在当前已登录的Web应用程序上执行非 本意的操作的攻击方法, 攻击者盗用了你在某个网站的身份，以你的名义发送恶意请求。 CSRF漏洞的原理 被攻击的两个前提: 1.登陆信任网站A, 并在本地生成Cookie 2.在不退出的情况下, 访问危险网站B 如不满足上述任意条件,就不会受到CSRF攻击让用户执行非本意的操作挟持用户某些html标签是可以发送HTTP GET类型的请求的。例如 &lt;img src=”http://www.baidu.com&quot;&gt;浏览器渲染img标签的时候, 并不知道img标签中的src属性值到底是不是一个图片. 浏览器只是根据src中的链接, 发起一个HTTP GET请求, 并携带上当前浏览器在目标网站上的凭证, 也就是cookie, 获取返回结果以图片的形式渲染. CSRF漏洞的分类与利用 GET CSRF CSRF最初的一个错误观点, 认为只能有GET请求发起, 因此一些开发者认为只要把重哎哟的操作改为POST请求就可以防止CSRF PHP中 $_REQUEST 既可以接收POST也可以接收GET请求 POST CSRF 如果服务端已经分了GET和POST请求, 只用$_POST来接收请求数据: 就最简单的方法就是在攻击页面构造一个form表单, 然后用javascript自动提交这个表单 CSRF漏洞的挖掘与防御 使用token 验证码 验证referer]]></content>
