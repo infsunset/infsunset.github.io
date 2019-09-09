@@ -1823,7 +1823,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #9cf486;
+  background: #ffb4e3;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2996,4 +2996,11 @@ pre .javascript .function {
   padding: 25px;
   -webkit-box-shadow: 0 0 5px rgba(202,203,203,0.5);
   -moz-box-shadow: 0 0 5px rgba(202,203,204,0.5);
+}
+body {
+  background: url("https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/c53e9df0011ae41ad743a0c0c59c90f5151d922c65d8061a2575621d267e508537e259e028386addcfa759962159e62c?pictype=scale&from=30113&version=3.3.3.3&fname=Desktopillust_29774459_20180420_105401.jpg&size=750");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
 }
