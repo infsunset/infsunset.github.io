@@ -167,6 +167,19 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[PHP连接MySql]]></title>
+    <url>%2F2019%2F07%2F10%2FPHP%E8%BF%9E%E6%8E%A5MySql%2F</url>
+    <content type="text"><![CDATA[mysqli =&gt; mysql improve函数123456789101112131415161718192021$conn=mysqli_connect() //连接数据库mysqli_connect_errno() //获取数据库连接错误号mysqli_connect_error //获取数据库连接错误信息$result=mysqli_query($con,$sql) //执行查询语句mysqli_num_rows //获取查询结果的记录数musqli_affected_rows //获取更新或删除或插入语句影响的记录数mysqli_fetch_assoc //把查询结果集中的一条记录读取为关联数组mysqli_close //关闭数据库连接$row = mysqli_fetch_assoc($result) //将查询结果集保存为关系型数组$row = mysqli_fetch_array($result) //将查询结果集保存为普通数组mysqli_free_result($result) //释放结果集]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>Mysql</tag>
+        <tag>函数</tag>
+        <tag>PHP</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[子网划分公式]]></title>
     <url>%2F2019%2F07%2F10%2F%E5%AD%90%E7%BD%91%E5%88%92%E5%88%86%E5%85%AC%E5%BC%8F%2F</url>
     <content type="text"><![CDATA[12345678910112次方 十进制 二进制2^1=2 128 100000002^2=4 192 110000002^3=8 224 111000002^4=16 240 111100002^5=32 248 111110002^6=64 252 111111002^7=128 254 111111102^8=256 255 111111112^9=512 2^10=1024 子网划分中的3个公式：求可容纳的主机数 2的m次方-2 m表示子网中0的个数（是2进制）；-2表示一个网络地址，一个广播地址。 求可以划分的网段数 2的n次方 n表示“借位”的个数——-&gt;网络位向主机位借的“1”的个数。 求范围 256-X （X表示子网掩码中非255的数） 举例 一个公司有4个部门（市场部、后勤部、财务部、销售部），每个部门有35台主机，要使用192.168.1.0/24来做地址划分4个不同的小网段。如何划分？ 原IP/MASK：192.168.1.0/24 2的n次方要小于等于子网个数 (2^n&gt;=4 n&gt;=2) 新的MASK 255.255.255.192 (11111111.11111111.11111111.11 000000) 256-192=64 12345范围：192.168.1.0 —— 192.168.1.63/26192.168.1.64 —— 192.168.1.127/26192.168.1.128 —— 192.168.1.191/26192.168.1.192 —— 192.168.1.255/26 反推网络地址和广播地址 111.243.77.191/11 思路： 现MASK – /11 255.111 00000.0.0 x=224 256-224=32123456范围：111.0.0.0 -- 111.31.255.255/11111.32.0.0 -- 111.63.255.255/11........243/32=7.....9111.32*7.0.0 -- 111.32*8-1.255.255/11111.224.0.0 -- 111.255.255.255/11]]></content>
@@ -176,6 +189,20 @@
       <tags>
         <tag>网络</tag>
         <tag>子网划分</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[PHP-PDO]]></title>
+    <url>%2F2019%2F07%2F10%2FPHP-PDO%2F</url>
+    <content type="text"><![CDATA[开启PDOWindows 修改php.ini配置文件 添加 extension=php_pdo.dll Linux 添加扩展 extension=pdo.so 实例连接1234567891011121314151617181920212223242526&lt;?php$dbms=&apos;mysql&apos;; //数据库类型$host=&apos;localhost&apos;; //数据库主机名$dbName=&apos;test&apos;; //使用的数据库$user=&apos;root&apos;; //数据库连接用户名$pass=&apos;&apos;; //对应的密码$dsn=&quot;$dbms:host=$host;dbname=$dbName&quot;;try &#123; $conn = new PDO($dsn, $user, $pass); //初始化一个PDO对象 echo &quot;连接成功&lt;br/&gt;&quot;; /*你还可以进行一次搜索操作 foreach ($conn-&gt;query(&apos;SELECT * from FOO&apos;) as $row) &#123; print_r($row); //你可以用 echo($GLOBAL); 来看到这些值 &#125; */ $conn = null;&#125; catch (PDOException $e) &#123; die (&quot;Error!: &quot; . $e-&gt;getMessage() . &quot;&lt;br/&gt;&quot;);&#125;//默认这个不是长连接，如果需要数据库长连接//需要最后加一个参数：array(PDO::ATTR_PERSISTENT =&gt; true)//变成这样：$conn = new PDO($dsn, $user, $pass, array(PDO::ATTR_PERSISTENT =&gt; true));?&gt; 查询1234567$sql = &quot;SELECT * FROM user WHERE username = ? and password = ?&quot;;$stmt = $conn -&gt; prepare($sql);$stmt -&gt; bindParam(1,$username);$stmt -&gt; bindParam(2,$password);$stmt -&gt; execute();$count = $stmt -&gt; rowCount();$row = $stmt -&gt; fetchAll(); 添加数据1234567$sql = &quot;INSERT INTO user(username,password) VALUES(?,?)&quot;;$stmt = $conn -&gt; prepare($sql);$stmt -&gt; bindParam(1,$username);$stmt -&gt; bindParam(2,$password);$stmt -&gt; execute();$count = $stmt -&gt; rowCount();$count &gt; 0 //添加成功]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>Mysql</tag>
+        <tag>函数</tag>
+        <tag>PHP</tag>
+        <tag>PDO</tag>
       </tags>
   </entry>
   <entry>
@@ -199,6 +226,18 @@
       <tags>
         <tag>SSH</tag>
         <tag>Kali</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[MySql常用命令]]></title>
+    <url>%2F2019%2F06%2F10%2FMySql%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%2F</url>
+    <content type="text"><![CDATA[修改密码update mysql.user set password=PASSWORD(‘123456’) where User=’root’; 刷新权限flush privileges; 新建数据库12345678910CREATE DATABASE `usera` CHARACTER SET &apos;utf8&apos; COLLATE &apos;utf8_general_ci&apos;; 新建数据库,设置字符集CREATE TABLE `user`.`users` ( #在user库中创建users表; `id` int(0) NOT NULL AUTO_INCREMENT, #id int类型,不为空,自动递增 `username` varchar(255) NOT NULL, #username varchar类型,长度255,不为空 `password` varchar(255) NOT NULL, PRIMARY KEY (`id`) #设置主键 id ,主键唯一性); 创建数据库CREATE DATABASE [数据库名]; 创建数据表CREATE TABLE [表名] ([字段名]数据类型,[字段名]数据类型); 插入数据INSERT INTO [表名] ([字段1],[字段2]) VALUES (‘values1’,’values2’); 更新数据UPDATE [表名] SET [字段]=[values] WHERE [字段]=’values’; 删除数据库DROP DATABASE [数据库名]; 删除数据表DROP TABLE [表名]; 删除记录DELETE from [表名] where [字段]=’values’; 用户权限分配create user ‘www’@’localhost’ identified by ‘qwer123456’; 新建数据库用户www,密码为qwer123456,仅本地登录grant select,insert,update on user.users to ‘www’@’localhost’; 在user.users表中授予:增 改 查 权限]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>Mysql</tag>
+        <tag>命令</tag>
       </tags>
   </entry>
 </search>
