@@ -94,7 +94,7 @@
 <meta property="og:site_name" content="FSunset">
 <meta property="og:description" content="背景 一些网站的业务需求，可能提供文件查看或下载的功能，如果对用户 查看或下载的文件不做限制，就能够查看或下载任意的文件，可以是源 代码文件、敏感文件等等。  成因 不管是任意文件读取还是任意文件下载，触发的漏洞条件都是相同的 存在读取文件的函数 读取文件的路径用户可控且未校验或校验不严 输出了文件内容  漏洞危害 下载服务器任意文件，包含脚本代码文件 、系统敏感文件等。可以 配合其它类型的漏洞。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-09T08:57:59.676Z">
+<meta property="og:updated_time" content="2019-09-10T03:33:33.813Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="文件查看与下载">
 <meta name="twitter:description" content="背景 一些网站的业务需求，可能提供文件查看或下载的功能，如果对用户 查看或下载的文件不做限制，就能够查看或下载任意的文件，可以是源 代码文件、敏感文件等等。  成因 不管是任意文件读取还是任意文件下载，触发的漏洞条件都是相同的 存在读取文件的函数 读取文件的路径用户可控且未校验或校验不严 输出了文件内容  漏洞危害 下载服务器任意文件，包含脚本代码文件 、系统敏感文件等。可以 配合其它类型的漏洞。">
@@ -408,36 +408,13 @@
 <li>下载服务器任意文件，包含脚本代码文件 、系统敏感文件等。可以 配合其它类型的漏洞。可以进一步代码审计，查找更多可利用的代码。</li>
 </ul>
 <h2 id="漏洞分类"><a href="#漏洞分类" class="headerlink" title="漏洞分类"></a>漏洞分类</h2><ul>
-<li>任意文件读取</li>
-<li>&lt;?php $filename=”test.txt”;readfile($filename);?&gt;</li>
-<li>&lt;?php $filename=”test.txt”;echo file_get_contens($filename);?&gt;</li>
-<li></li>
-<li>&lt;?php</li>
-<li>$filename=”test.txt”;</li>
-<li>$fp=fopen($filename,”r”)or die(“Unable to open file!”);</li>
-<li>$data=fread($fp,1024);</li>
-<li>fclose($fp);</li>
-<li>echo $data;?&gt;</li>
-<li></li>
-<li>$filename=$_GET[f];</li>
-<li>$filename没有经过校验,或者校验不合格,用户可以控制这个变量读取任意文件,比如/etc/passwd,index.php等等.</li>
-<li></li>
-<li>任意文件下载</li>
-<li></li>
-<li>&lt;?php</li>
-<li>if(empty($_GET[‘filename’])){</li>
-<li>exit();</li>
-<li>}</li>
-<li>$filename=$_GET[‘filename’];</li>
-<li>header(“Content-Type:application/octet-stream”);</li>
-<li>header(“Accept-Length:”.filesize($filename));</li>
-<li>header(“ Content-Disposition:attachment;filename=”.$filename );</li>
-<li>readfile($filename);</li>
-<li>?&gt; 在上述代码中:</li>
-<li>$filename=”uploads/20170206.jpg”;</li>
-<li>$filename一般是用户需要下载的文件</li>
-<li>$filename$_GET[f];</li>
-<li>$filename没有经验校验,或者校验不合格,用户可以控制这个变量下载任意文件,比如/etc/passwd</li>
+<li><p>任意文件读取</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php $filename=&quot;test.txt&quot;;readfile($filename);?&gt;</span><br><span class="line">&lt;?php $filename=&quot;test.txt&quot;;echo file_get_contens($filename);?&gt;</span><br><span class="line"></span><br><span class="line">&lt;?php</span><br><span class="line">	$filename=&quot;test.txt&quot;;</span><br><span class="line">	$fp=fopen($filename,&quot;r&quot;)or die(&quot;Unable to open file!&quot;);</span><br><span class="line">	$data=fread($fp,1024);</span><br><span class="line">	fclose($fp);</span><br><span class="line">	echo $data;</span><br><span class="line">?&gt;</span><br><span class="line"></span><br><span class="line">	$filename=$_GET[f];</span><br><span class="line">	$filename没有经过校验,或者校验不合格,用户可以控制这个变量读取任意文件,比如/etc/passwd,index.php等等.</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>任意文件下载</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">	if(empty($_GET[&apos;filename&apos;]))&#123;</span><br><span class="line">		exit();</span><br><span class="line">	&#125;</span><br><span class="line">	$filename=$_GET[&apos;filename&apos;];</span><br><span class="line">	*eader(&quot;Content-Type:application/octet-stream&quot;);</span><br><span class="line">	header(&quot;Accept-Length:&quot;.filesize($filename));</span><br><span class="line">	header(&quot; Content-Disposition:attachment;filename=&quot;.$filename );</span><br><span class="line">	readfile($filename);</span><br><span class="line">?&gt; 在上述代码中:</span><br><span class="line"></span><br><span class="line">	$filename=&quot;uploads/20170206.jpg&quot;;</span><br><span class="line">	$filename一般是用户需要下载的文件</span><br><span class="line">	$filename$_GET[f];</span><br><span class="line">	$filename没有经验校验,或者校验不合格,用户可以控制这个变量下载任意文件,比如/etc/passwd</span><br></pre></td></tr></table></figure>
+
+</li>
 </ul>
 <h2 id="漏洞挖掘"><a href="#漏洞挖掘" class="headerlink" title="漏洞挖掘"></a>漏洞挖掘</h2><ol>
 <li>Web漏洞扫描器(AWVS,AppScan,Openvas,Nessus)</li>
@@ -508,8 +485,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/08/16/SQL注入/" rel="next" title="SQL注入">
-                <i class="fa fa-chevron-left"></i> SQL注入
+              <a href="/2019/08/19/文件包含漏洞/" rel="next" title="文件包含漏洞">
+                <i class="fa fa-chevron-left"></i> 文件包含漏洞
               </a>
             
           </div>
@@ -518,8 +495,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/08/19/文件包含漏洞/" rel="prev" title="文件包含漏洞">
-                文件包含漏洞 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/08/19/Network-Shell/" rel="prev" title="Network-Shell端口转发">
+                Network-Shell端口转发 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -597,7 +574,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -608,7 +585,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -619,7 +596,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">24</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
