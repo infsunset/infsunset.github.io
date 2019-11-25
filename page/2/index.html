@@ -563,13 +563,14 @@ root用户
 思路:
 general log设置为ON
 利用mysql的一个日志文件
-这个日志文件每执行一个sql语句就会将其执行的保存
+这个日志文件会记录执行过的sql语句
 将这个日志文件修改为.php文件保存
 然后执行一条一句话的sql语句
 使用菜刀连接即可
 
 三句话
-set global general_log=’on’
+set global general_log=’on’;
+SET g
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1086,7 +1087,7 @@ order by猜字段，order by 1，返回正常；order by 2，返回正常；orde
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://infsunset.github.io/2019/07/10/子网划分公式/">
+    <link itemprop="mainEntityOfPage" href="https://infsunset.github.io/2019/07/10/PHP-PDO/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="FSunset">
@@ -1105,7 +1106,7 @@ order by猜字段，order by 1，返回正常；order by 2，返回正常；orde
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/07/10/子网划分公式/" itemprop="url">子网划分公式</a></h1>
+                <a class="post-title-link" href="/2019/07/10/PHP-PDO/" itemprop="url">PHP-PDO</a></h1>
         
 
         <div class="post-meta">
@@ -1140,8 +1141,8 @@ order by猜字段，order by 1，返回正常；order by 2，返回正常；orde
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Network/" itemprop="url" rel="index">
-                    <span itemprop="name">Network</span>
+                  <a href="/categories/工具/" itemprop="url" rel="index">
+                    <span itemprop="name">工具</span>
                   </a>
                 </span>
 
@@ -1183,11 +1184,17 @@ order by猜字段，order by 1，返回正常；order by 2，返回正常；orde
 	  
         
           
-          12345678910112次方		十进制		二进制2^1=2		128		100000002^2=4		192		110000002^3=8		224		111000002^4=16		240		111100002^5=32		248		111110002^6=64		252		111111002
+          开启PDOWindows 修改php.ini配置文件
+添加 extension=php_pdo.dll
+
+Linux 添加扩展
+extension=pdo.so
+
+实例连接1234567891011121314151617181920212223242526&lt;?php$dbms=&apos;m
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2019/07/10/子网划分公式/#more" rel="contents">
+            <a class="btn" href="/2019/07/10/PHP-PDO/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1390,7 +1397,7 @@ order by猜字段，order by 1，返回正常；order by 2，返回正常；orde
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://infsunset.github.io/2019/07/10/PHP-PDO/">
+    <link itemprop="mainEntityOfPage" href="https://infsunset.github.io/2019/07/10/子网划分公式/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="FSunset">
@@ -1409,7 +1416,7 @@ order by猜字段，order by 1，返回正常；order by 2，返回正常；orde
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/07/10/PHP-PDO/" itemprop="url">PHP-PDO</a></h1>
+                <a class="post-title-link" href="/2019/07/10/子网划分公式/" itemprop="url">子网划分公式</a></h1>
         
 
         <div class="post-meta">
@@ -1444,8 +1451,8 @@ order by猜字段，order by 1，返回正常；order by 2，返回正常；orde
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/工具/" itemprop="url" rel="index">
-                    <span itemprop="name">工具</span>
+                  <a href="/categories/Network/" itemprop="url" rel="index">
+                    <span itemprop="name">Network</span>
                   </a>
                 </span>
 
@@ -1487,17 +1494,164 @@ order by猜字段，order by 1，返回正常；order by 2，返回正常；orde
 	  
         
           
-          开启PDOWindows 修改php.ini配置文件
-添加 extension=php_pdo.dll
-
-Linux 添加扩展
-extension=pdo.so
-
-实例连接1234567891011121314151617181920212223242526&lt;?php$dbms=&apos;m
+          12345678910112次方		十进制		二进制2^1=2		128		100000002^2=4		192		110000002^3=8		224		111000002^4=16		240		111100002^5=32		248		111110002^6=64		252		111111002
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2019/07/10/PHP-PDO/#more" rel="contents">
+            <a class="btn" href="/2019/07/10/子网划分公式/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://infsunset.github.io/2019/07/05/CVE-2019-0708/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FSunset">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FSunset">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/05/CVE-2019-0708/" itemprop="url">CVE-2019-0708复现</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-05T00:00:00+08:00">
+                2019-07-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Windows/" itemprop="url" rel="index">
+                    <span itemprop="name">Windows</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+
+          
+            
+          
+
+          
+          
+			
+
+			
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+	  
+        
+          
+          概述20190514，微软发布补丁，修复了一个严重的RDP远程代码执行漏洞。该漏洞无需身份认证和用户交互，可能形成蠕虫爆发，影响堪比wannycry。
+二级标题123456789Windows 7Windows Server 2008 R2Windows Server 2008Windows Ser
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/07/05/CVE-2019-0708/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1699,165 +1853,6 @@ console.log(
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://infsunset.github.io/2019/06/15/SSH服务-容许root登陆/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="FSunset">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="FSunset">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/06/15/SSH服务-容许root登陆/" itemprop="url">SSH服务 容许root登陆</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-15T00:00:00+08:00">
-                2019-06-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-
-          
-            
-          
-
-          
-          
-			
-
-			
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-	  
-        
-          
-          查看ssh服务状态
-#/etc/init.d/ssh status
-
-修改配置文件
-vim /etc/ssh/sshd_config
-#PermitRootLogin prohibit-password改为:
-PermitRootLogin yes
-#PasswordAuthentication y
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/06/15/SSH服务-容许root登陆/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1908,7 +1903,7 @@ PermitRootLogin yes
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1919,7 +1914,7 @@ PermitRootLogin yes
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -1930,7 +1925,7 @@ PermitRootLogin yes
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

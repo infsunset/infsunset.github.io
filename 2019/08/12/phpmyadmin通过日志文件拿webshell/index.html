@@ -86,21 +86,21 @@
 
 
 
-<meta name="description" content="前提: root用户  思路: general log设置为ON 利用mysql的一个日志文件 这个日志文件每执行一个sql语句就会将其执行的保存 将这个日志文件修改为.php文件保存 然后执行一条一句话的sql语句 使用菜刀连接即可  三句话 set global general_log=’on’; SET global general_log_file=’C:/webshell/www/cmd">
+<meta name="description" content="前提: root用户  思路: general log设置为ON 利用mysql的一个日志文件 这个日志文件会记录执行过的sql语句 将这个日志文件修改为.php文件保存 然后执行一条一句话的sql语句 使用菜刀连接即可  三句话 set global general_log=’on’; SET global general_log_file=’C:/webshell/www/cmd.php’;">
 <meta name="keywords" content="phpmyadmin,Webshell">
 <meta property="og:type" content="article">
 <meta property="og:title" content="phpmyadmin通过日志文件拿webshell">
 <meta property="og:url" content="https://infsunset.github.io/2019/08/12/phpmyadmin通过日志文件拿webshell/index.html">
 <meta property="og:site_name" content="FSunset">
-<meta property="og:description" content="前提: root用户  思路: general log设置为ON 利用mysql的一个日志文件 这个日志文件每执行一个sql语句就会将其执行的保存 将这个日志文件修改为.php文件保存 然后执行一条一句话的sql语句 使用菜刀连接即可  三句话 set global general_log=’on’; SET global general_log_file=’C:/webshell/www/cmd">
+<meta property="og:description" content="前提: root用户  思路: general log设置为ON 利用mysql的一个日志文件 这个日志文件会记录执行过的sql语句 将这个日志文件修改为.php文件保存 然后执行一条一句话的sql语句 使用菜刀连接即可  三句话 set global general_log=’on’; SET global general_log_file=’C:/webshell/www/cmd.php’;">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://infsunset.github.io/img/1.png">
 <meta property="og:image" content="https://infsunset.github.io/img/2.png">
 <meta property="og:image" content="https://infsunset.github.io/img/3.png">
-<meta property="og:updated_time" content="2019-09-09T03:18:38.806Z">
+<meta property="og:updated_time" content="2019-11-25T02:33:35.329Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="phpmyadmin通过日志文件拿webshell">
-<meta name="twitter:description" content="前提: root用户  思路: general log设置为ON 利用mysql的一个日志文件 这个日志文件每执行一个sql语句就会将其执行的保存 将这个日志文件修改为.php文件保存 然后执行一条一句话的sql语句 使用菜刀连接即可  三句话 set global general_log=’on’; SET global general_log_file=’C:/webshell/www/cmd">
+<meta name="twitter:description" content="前提: root用户  思路: general log设置为ON 利用mysql的一个日志文件 这个日志文件会记录执行过的sql语句 将这个日志文件修改为.php文件保存 然后执行一条一句话的sql语句 使用菜刀连接即可  三句话 set global general_log=’on’; SET global general_log_file=’C:/webshell/www/cmd.php’;">
 <meta name="twitter:image" content="https://infsunset.github.io/img/1.png">
 
 
@@ -405,7 +405,7 @@
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路:"></a>思路:</h2><ul>
 <li>general log设置为ON</li>
 <li>利用mysql的一个日志文件</li>
-<li>这个日志文件每执行一个sql语句就会将其执行的保存<br><img src="/img/1.png" alt></li>
+<li>这个日志文件会记录执行过的sql语句<br><img src="/img/1.png" alt></li>
 <li>将这个日志文件修改为.php文件保存</li>
 <li>然后执行一条一句话的sql语句<br><img src="/img/2.png" alt></li>
 <li>使用菜刀连接即可<br><img src="/img/3.png" alt></li>
@@ -536,7 +536,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -547,7 +547,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -558,7 +558,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
