@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[博客标题]]></title>
+    <title><![CDATA[docker]]></title>
     <url>%2F2019%2F12%2F25%2Fdocker%2F</url>
     <content type="text"><![CDATA[docker常用命令123456789docker search [镜像名] //搜索镜像docker pull [镜像名] //下载镜像docker images //查看已下载的镜像docker ps -a //查看所有容器docker stop [容器名] //停止容器docker stop $(docker ps -aq) //停止容器docker rm [容器名] //删除容器docker rmi [镜像名] //删除镜像docker run [容器名] IMAGE //创建容器 run命令详解见:https://www.cnblogs.com/yfalcon/p/9044246.html docker搭建中的问题IPv4 forwarding is disabled. Networking will not work12345678910111213修改/etc/sysctl.conf或者/usr/lib/sysctl.d/00-system.conf添加如下代码：net.ipv4.ip_forward=1然后重启网络：systemctl restart network查看是否添加成功：sysctl net.ipv4.ip_forward输出为1时证明成功在宿主机上执行：net.ipv4.ip_forward=1 &gt;&gt; /usr/lib/sysctl.d/00-system.conf重启network和docker服务systemctl restart network &amp;&amp; systemctl restart docker 无法使用 systemctl 命令创建容器时加上：–privileged=true 1234567Centos 7docker run -tid --name test_1 --privileged=true /usr/sbin/initdocker exec -it test_1 /bin/bashUbunut 16.04docker run -tid --name test_2 --privileged=true /sbin/initdocker exec -it test_2 /bin/bash]]></content>
       <categories>
