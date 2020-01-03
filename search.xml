@@ -12,6 +12,17 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[2019 年终总结]]></title>
+    <url>%2F2020%2F01%2F01%2F2019%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93%2F</url>
+    <content type="text"><![CDATA[已不停机工作7千多天。回顾2019年。 初转眼大三毕业，实习结束。 2019，被荒废的一年。 学到知识、习得技能、增涨见识最多的一年。 初次步入社会，被人潮挤得灰头土脸。 在安全这条路上摸爬滚打。 明白了越来越多的0到1。 了解了不少的1到无穷。 溯新的一年，认清自己。勤学好问，脚踏实地。 不可 好高骛远 。—“病学者厌卑近而骛高远，卒无成焉。” 末我遇到了儿时的那个圆。 这次选择，也许只是为了完成儿时理想。 也许是想为人生的这一阶段画上一个圆。 本文纯属虚构，如有雷同，纯属意外~ 祝看到我的人和没看到我的人们：元旦快乐~新的一年身体健康，万事如意！]]></content>
+      <categories>
+        <category>总结</category>
+      </categories>
+      <tags>
+        <tag>个人总结</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[代码审计]]></title>
     <url>%2F2019%2F12%2F26%2F%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%2F</url>
     <content type="text"><![CDATA[代码审计简介顾名思义就是检查源代码中的安全缺陷，检查程序源代码是否存在安全隐患，或者有编码不规范的地方，通过自动化工具或者人工审查的方式，对程序源代码逐条进行检查和分析，发现这些源代码缺陷引发的安全漏洞，并提供代码修订措施和建议。 工具源代码审计工具通常会查找常见漏洞，仅适用于特定的编程语言。 这种自动化工具可用于节省时间，但不应依赖于深入审计。 建议将这些工具作为基于政策的方法的一部分。 PHP代码审计RIPS下载地址：https://sourceforge.net/projects/rips-scanner Java代码审计findbugs下载地址：http://findbugs.sourceforge.net/downloads.htmlhttps://find-sec-bugs.github.io/ Pythonbandit下载地址：https://github.com/openstack/bandit py-find-injection下载地址：https://github.com/uber/py-find-injection pyt下载地址：https://github.com/python-security/pyt .netSecurity Code Scan下载地址：https://security-code-scan.github.io/ C++flawfinder下载地址：https://sourceforge.net/projects/flawfinder/ JSNodeJsScan下载地址：https://github.com/ajinabraham/NodeJsScan 商业工具静态RISP，VCG，Fortify SCA 动态360-sky wolf鸟哥-taintCobra-https://github.com/WhaleShark-Team/cobra]]></content>
@@ -90,16 +101,16 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[文件查看与下载]]></title>
-    <url>%2F2019%2F08%2F19%2F%E6%96%87%E4%BB%B6%E6%9F%A5%E7%9C%8B%E4%B8%8E%E4%B8%8B%E8%BD%BD%2F</url>
-    <content type="text"><![CDATA[背景 一些网站的业务需求，可能提供文件查看或下载的功能，如果对用户 查看或下载的文件不做限制，就能够查看或下载任意的文件，可以是源 代码文件、敏感文件等等。 成因 不管是任意文件读取还是任意文件下载，触发的漏洞条件都是相同的 存在读取文件的函数 读取文件的路径用户可控且未校验或校验不严 输出了文件内容 漏洞危害 下载服务器任意文件，包含脚本代码文件 、系统敏感文件等。可以 配合其它类型的漏洞。可以进一步代码审计，查找更多可利用的代码。 漏洞分类 任意文件读取 Code12345678910111213&lt;?php $filename=&quot;test.txt&quot;;readfile($filename);?&gt;&lt;?php $filename=&quot;test.txt&quot;;echo file_get_contens($filename);?&gt;&lt;?php $filename=&quot;test.txt&quot;; $fp=fopen($filename,&quot;r&quot;)or die(&quot;Unable to open file!&quot;); $data=fread($fp,1024); fclose($fp); echo $data;?&gt; $filename=$_GET[f]; $filename没有经过校验,或者校验不合格,用户可以控制这个变量读取任意文件,比如/etc/passwd,index.php等等. 任意文件下载 Code123456789101112131415&lt;?php if(empty($_GET[&apos;filename&apos;]))&#123; exit(); &#125; $filename=$_GET[&apos;filename&apos;]; *eader(&quot;Content-Type:application/octet-stream&quot;); header(&quot;Accept-Length:&quot;.filesize($filename)); header(&quot; Content-Disposition:attachment;filename=&quot;.$filename ); readfile($filename);?&gt; 在上述代码中: $filename=&quot;uploads/20170206.jpg&quot;; $filename一般是用户需要下载的文件 $filename$_GET[f]; $filename没有经验校验,或者校验不合格,用户可以控制这个变量下载任意文件,比如/etc/passwd 漏洞挖掘 Web漏洞扫描器(AWVS,AppScan,Openvas,Nessus) 手动从链接 readfile.php?file=xxx.txt download.php?file=xxx.rar 参数名查看 &amp;readpath,&amp;filepath,&amp;path,&amp;inputfile,&amp;url,&amp;data,&amp;readfile,&amp;menu,META-INF,WEB-INF 漏洞验证 index.php?f=../../../../../etc/passwd index.php?f=../index.php index.php?f=file:///etc/passwd 当参数f值为php文件时: 若文件被解析则是文件包含漏洞 若显示源码,则是文件查看漏洞 提示下载则是文件下载漏洞 漏洞修复方案 过滤 . 点,使用户在url中不能回溯上级目录 正则严格判断用户输入的参数 php.ini配置open_basedir限制文件访问范围]]></content>
+    <title><![CDATA[Network-Shell端口转发]]></title>
+    <url>%2F2019%2F08%2F19%2FNetwork-Shell%2F</url>
+    <content type="text"><![CDATA[NetSH(Network Shell)是windows系统本身提供的功能强大的网络配置命令行工具 netsh interface portproxy add v4tov4 – 添加通过 IPv4 的 IPv4 和代理连接到的侦听项目 netsh interface portproxy add v4tov4 [listenport=]|[connectaddress=]|[[connectport=]|][[listenaddress=]|] [[protocol=]tcp] 参数 listenport IPv4 侦听端口 connectaddress IPv4 连接地址 connectport IPv4 连接端口 listenaddress IPv4 侦听地址 protocol 使用的协议。现在只支持 TCP 实例 netsh interface portproxy add v4tov4 listenaddress=192.168.1.8 listenport=14941 connectaddress=192.168.1.118 connectport=1494 在IPV4下将监听本地IP 192.168.1.8:14941,接受到的数据转发给192.168.1.118:1494 netsh interface portproxy delete v4tov4 listenaddress=192.168.1.8 listenport=33891 在IPV4下删除监听本地IP 192.168.1.8:33891 netsh interface portproxy show v4tov4 查看在IPV4下配置的端口转发的策略]]></content>
       <categories>
         <category>渗透测试</category>
       </categories>
       <tags>
-        <tag>PHP</tag>
-        <tag>文件查看</tag>
-        <tag>文件下载</tag>
+        <tag>端口转发</tag>
+        <tag>内网渗透</tag>
+        <tag>工具</tag>
       </tags>
   </entry>
   <entry>
@@ -115,16 +126,16 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Network-Shell端口转发]]></title>
-    <url>%2F2019%2F08%2F19%2FNetwork-Shell%2F</url>
-    <content type="text"><![CDATA[NetSH(Network Shell)是windows系统本身提供的功能强大的网络配置命令行工具 netsh interface portproxy add v4tov4 – 添加通过 IPv4 的 IPv4 和代理连接到的侦听项目 netsh interface portproxy add v4tov4 [listenport=]|[connectaddress=]|[[connectport=]|][[listenaddress=]|] [[protocol=]tcp] 参数 listenport IPv4 侦听端口 connectaddress IPv4 连接地址 connectport IPv4 连接端口 listenaddress IPv4 侦听地址 protocol 使用的协议。现在只支持 TCP 实例 netsh interface portproxy add v4tov4 listenaddress=192.168.1.8 listenport=14941 connectaddress=192.168.1.118 connectport=1494 在IPV4下将监听本地IP 192.168.1.8:14941,接受到的数据转发给192.168.1.118:1494 netsh interface portproxy delete v4tov4 listenaddress=192.168.1.8 listenport=33891 在IPV4下删除监听本地IP 192.168.1.8:33891 netsh interface portproxy show v4tov4 查看在IPV4下配置的端口转发的策略]]></content>
+    <title><![CDATA[文件查看与下载]]></title>
+    <url>%2F2019%2F08%2F19%2F%E6%96%87%E4%BB%B6%E6%9F%A5%E7%9C%8B%E4%B8%8E%E4%B8%8B%E8%BD%BD%2F</url>
+    <content type="text"><![CDATA[背景 一些网站的业务需求，可能提供文件查看或下载的功能，如果对用户 查看或下载的文件不做限制，就能够查看或下载任意的文件，可以是源 代码文件、敏感文件等等。 成因 不管是任意文件读取还是任意文件下载，触发的漏洞条件都是相同的 存在读取文件的函数 读取文件的路径用户可控且未校验或校验不严 输出了文件内容 漏洞危害 下载服务器任意文件，包含脚本代码文件 、系统敏感文件等。可以 配合其它类型的漏洞。可以进一步代码审计，查找更多可利用的代码。 漏洞分类 任意文件读取 Code12345678910111213&lt;?php $filename=&quot;test.txt&quot;;readfile($filename);?&gt;&lt;?php $filename=&quot;test.txt&quot;;echo file_get_contens($filename);?&gt;&lt;?php $filename=&quot;test.txt&quot;; $fp=fopen($filename,&quot;r&quot;)or die(&quot;Unable to open file!&quot;); $data=fread($fp,1024); fclose($fp); echo $data;?&gt; $filename=$_GET[f]; $filename没有经过校验,或者校验不合格,用户可以控制这个变量读取任意文件,比如/etc/passwd,index.php等等. 任意文件下载 Code123456789101112131415&lt;?php if(empty($_GET[&apos;filename&apos;]))&#123; exit(); &#125; $filename=$_GET[&apos;filename&apos;]; *eader(&quot;Content-Type:application/octet-stream&quot;); header(&quot;Accept-Length:&quot;.filesize($filename)); header(&quot; Content-Disposition:attachment;filename=&quot;.$filename ); readfile($filename);?&gt; 在上述代码中: $filename=&quot;uploads/20170206.jpg&quot;; $filename一般是用户需要下载的文件 $filename$_GET[f]; $filename没有经验校验,或者校验不合格,用户可以控制这个变量下载任意文件,比如/etc/passwd 漏洞挖掘 Web漏洞扫描器(AWVS,AppScan,Openvas,Nessus) 手动从链接 readfile.php?file=xxx.txt download.php?file=xxx.rar 参数名查看 &amp;readpath,&amp;filepath,&amp;path,&amp;inputfile,&amp;url,&amp;data,&amp;readfile,&amp;menu,META-INF,WEB-INF 漏洞验证 index.php?f=../../../../../etc/passwd index.php?f=../index.php index.php?f=file:///etc/passwd 当参数f值为php文件时: 若文件被解析则是文件包含漏洞 若显示源码,则是文件查看漏洞 提示下载则是文件下载漏洞 漏洞修复方案 过滤 . 点,使用户在url中不能回溯上级目录 正则严格判断用户输入的参数 php.ini配置open_basedir限制文件访问范围]]></content>
       <categories>
         <category>渗透测试</category>
       </categories>
       <tags>
-        <tag>端口转发</tag>
-        <tag>内网渗透</tag>
-        <tag>工具</tag>
+        <tag>PHP</tag>
+        <tag>文件查看</tag>
+        <tag>文件下载</tag>
       </tags>
   </entry>
   <entry>
@@ -211,6 +222,18 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[子网划分公式]]></title>
+    <url>%2F2019%2F07%2F10%2F%E5%AD%90%E7%BD%91%E5%88%92%E5%88%86%E5%85%AC%E5%BC%8F%2F</url>
+    <content type="text"><![CDATA[Code12345678910112次方 十进制 二进制2^1=2 128 100000002^2=4 192 110000002^3=8 224 111000002^4=16 240 111100002^5=32 248 111110002^6=64 252 111111002^7=128 254 111111102^8=256 255 111111112^9=512 2^10=1024 子网划分中的3个公式：求可容纳的主机数 2的m次方-2 m表示子网中0的个数（是2进制）；-2表示一个网络地址，一个广播地址。 求可以划分的网段数 2的n次方 n表示“借位”的个数——-&gt;网络位向主机位借的“1”的个数。 求范围 256-X （X表示子网掩码中非255的数） 举例 一个公司有4个部门（市场部、后勤部、财务部、销售部），每个部门有35台主机，要使用192.168.1.0/24来做地址划分4个不同的小网段。如何划分？ 原IP/MASK：192.168.1.0/24 2的n次方要小于等于子网个数 (2^n&gt;=4 n&gt;=2) 新的MASK 255.255.255.192 (11111111.11111111.11111111.11 000000) 256-192=64 Code12345范围：192.168.1.0 —— 192.168.1.63/26192.168.1.64 —— 192.168.1.127/26192.168.1.128 —— 192.168.1.191/26192.168.1.192 —— 192.168.1.255/26 反推网络地址和广播地址 111.243.77.191/11 思路： 现MASK – /11 255.111 00000.0.0 x=224 256-224=32Code123456范围：111.0.0.0 -- 111.31.255.255/11111.32.0.0 -- 111.63.255.255/11........243/32=7.....9111.32*7.0.0 -- 111.32*8-1.255.255/11111.224.0.0 -- 111.255.255.255/11]]></content>
+      <categories>
+        <category>Network</category>
+      </categories>
+      <tags>
+        <tag>网络</tag>
+        <tag>子网划分</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[PHP连接MySql]]></title>
     <url>%2F2019%2F07%2F10%2FPHP%E8%BF%9E%E6%8E%A5MySql%2F</url>
     <content type="text"><![CDATA[mysqli =&gt; mysql improve函数Code123456789101112131415161718192021$conn=mysqli_connect() //连接数据库mysqli_connect_errno() //获取数据库连接错误号mysqli_connect_error //获取数据库连接错误信息$result=mysqli_query($con,$sql) //执行查询语句mysqli_num_rows //获取查询结果的记录数musqli_affected_rows //获取更新或删除或插入语句影响的记录数mysqli_fetch_assoc //把查询结果集中的一条记录读取为关联数组mysqli_close //关闭数据库连接$row = mysqli_fetch_assoc($result) //将查询结果集保存为关系型数组$row = mysqli_fetch_array($result) //将查询结果集保存为普通数组mysqli_free_result($result) //释放结果集]]></content>
@@ -235,18 +258,6 @@
         <tag>函数</tag>
         <tag>PHP</tag>
         <tag>PDO</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[子网划分公式]]></title>
-    <url>%2F2019%2F07%2F10%2F%E5%AD%90%E7%BD%91%E5%88%92%E5%88%86%E5%85%AC%E5%BC%8F%2F</url>
-    <content type="text"><![CDATA[Code12345678910112次方 十进制 二进制2^1=2 128 100000002^2=4 192 110000002^3=8 224 111000002^4=16 240 111100002^5=32 248 111110002^6=64 252 111111002^7=128 254 111111102^8=256 255 111111112^9=512 2^10=1024 子网划分中的3个公式：求可容纳的主机数 2的m次方-2 m表示子网中0的个数（是2进制）；-2表示一个网络地址，一个广播地址。 求可以划分的网段数 2的n次方 n表示“借位”的个数——-&gt;网络位向主机位借的“1”的个数。 求范围 256-X （X表示子网掩码中非255的数） 举例 一个公司有4个部门（市场部、后勤部、财务部、销售部），每个部门有35台主机，要使用192.168.1.0/24来做地址划分4个不同的小网段。如何划分？ 原IP/MASK：192.168.1.0/24 2的n次方要小于等于子网个数 (2^n&gt;=4 n&gt;=2) 新的MASK 255.255.255.192 (11111111.11111111.11111111.11 000000) 256-192=64 Code12345范围：192.168.1.0 —— 192.168.1.63/26192.168.1.64 —— 192.168.1.127/26192.168.1.128 —— 192.168.1.191/26192.168.1.192 —— 192.168.1.255/26 反推网络地址和广播地址 111.243.77.191/11 思路： 现MASK – /11 255.111 00000.0.0 x=224 256-224=32Code123456范围：111.0.0.0 -- 111.31.255.255/11111.32.0.0 -- 111.63.255.255/11........243/32=7.....9111.32*7.0.0 -- 111.32*8-1.255.255/11111.224.0.0 -- 111.255.255.255/11]]></content>
-      <categories>
-        <category>Network</category>
-      </categories>
-      <tags>
-        <tag>网络</tag>
-        <tag>子网划分</tag>
       </tags>
   </entry>
   <entry>
