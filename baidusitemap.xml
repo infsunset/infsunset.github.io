@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://infsunset.github.io/2020/05/01/Python%20selenium%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/</loc>
+    <lastmod>2020-05-07</lastmod>
+  </url>  <url>
+    <loc>https://infsunset.github.io/2020/02/04/Windows%20cmd%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6/</loc>
+    <lastmod>2020-05-07</lastmod>
+  </url>  <url>
     <loc>https://infsunset.github.io/2020/01/01/A%E6%A8%A1%E6%9D%BF/</loc>
-    <lastmod>2020-01-14</lastmod>
+    <lastmod>2020-05-07</lastmod>
   </url>  <url>
     <loc>https://infsunset.github.io/2020/01/14/%E8%9A%82%E8%9A%81%E6%A3%AE%E6%9E%97self%20xss/</loc>
     <lastmod>2020-01-14</lastmod>

